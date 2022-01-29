@@ -1,0 +1,13 @@
+#primary-navigation {
+    position: fixed;
+    width: 67%;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    padding: 118px 32px;
+    flex-direction: column;
+    z-index: 5;
+    --gap: 1rem;
+    background-color: rgba(0,0,0, 0.3);
+    backdrop-filter: blur(30px);
+}

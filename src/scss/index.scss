@@ -127,8 +127,7 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
 }
 
 .grid-container {
-    text-align: center;  
-    border: 5px solid green;
+    text-align: center;
     display: grid;
     place-items: center;
     padding: 0 1rem;
@@ -137,7 +136,7 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
     }
 }
 
-@media (min-width: 45em) {
+@media (min-width: 55em) {
     .grid-container {
         padding: 0;
         text-align: left;
@@ -146,11 +145,19 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
         place-items: unset;
         &> *:first-child {
             grid-column: 2;
-            outline: 1px solid red;
         }
         &> *:last-child {
             grid-column: 3;
-            outline: 1px solid yellow;
+        }
+        &--home {
+            padding-bottom: max(6rem, 10vh);
+            align-items: end;
+            &> *:first-child {
+                justify-self: start;
+            }
+            &> *:last-child {
+                justify-self: end;
+            }
         }
     }
 }
@@ -328,15 +335,8 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
     }
 }
 
-// nav {
-//     position: absolute;
-// }
+/* -------------------------- */
+/* Page specific              */
+/* -------------------------- */
 
-// section {
-//     height: 100vh;
-//     padding-top: 20rem;
-// }
-
-// .primary-header {
-//     margin-top: 4rem;
-// }
+// Home

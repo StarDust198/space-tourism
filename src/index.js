@@ -6,7 +6,7 @@ import {
   Route
 } from 'react-router-dom';
 
-import './index.scss';
+import './scss/index.scss';
 
 import App from './App';
 import StartPage from './pages/StartPage';
