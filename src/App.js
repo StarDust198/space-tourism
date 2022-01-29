@@ -1,22 +1,26 @@
+import { Outlet } from 'react-router-dom'
+import logo from './assets/shared/logo.svg'
 
 function App() {
   return (
-    <div className="App" style={{}}>
-
-{/*         00 Home
-        01 Destination
-        02 Crew
-        03 Technology
-
-        So, you want to travel to
-        Space
-        Let’s face it; if you want to go to space, you might as well genuinely go to 
-        outer space and not hover kind of on the edge of it. Well sit back, and relax 
-        because we’ll give you a truly out of this world experience!
-
-        Explore */}
-    </div>
-  );
+    <>
+      <header className='primary-header flex'>
+        <div><img className="logo" src={logo} alt="Space Tourism Logo" /></div>
+{/*         <div></div>
+        <nav>
+          <ul className="primary-navigation underline-indicators flex">
+            <li className="active"><a className="ff-sans-cond letter-spacing-2 fs-300 uppercase text-white" href="/"><span>00</span> Home</a></li>
+            <li><a className="ff-sans-cond letter-spacing-2 fs-300 uppercase text-white" href="/"><span>01</span> Destination</a></li>
+            <li><a className="ff-sans-cond letter-spacing-2 fs-300 uppercase text-white" href="/"><span>02</span> Crew</a></li>
+            <li><a className="ff-sans-cond letter-spacing-2 fs-300 uppercase text-white" href="/"><span>04</span> Technology</a></li>
+          </ul>
+        </nav> */}
+      </header>
+      <div className="grid-container">
+        <Outlet />
+      </div>
+    </>
+  )
 }
 
 export default App;
