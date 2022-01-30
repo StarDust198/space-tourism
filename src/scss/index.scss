@@ -98,6 +98,10 @@ input, button, textarea, select {
     display: block;
 }
 
+.d-none {
+    display: none;
+}
+
 .flex {
     display: flex;
     gap: var(--gap, 1rem);
@@ -257,40 +261,6 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
     }
 }
 
-.primary-navigation {
-    list-style: none;
-    --gap: 8rem;
-    padding: 0;
-    margin: 0;
-    & a {
-        --gap: 8rem;
-        text-decoration: none;
-        & > span {
-            font-weight: 700;
-            margin-right: .5em;
-        }
-    }
-}
-
-.underline-indicators > * {
-    cursor: pointer;
-    padding: var(--ul-gap, 1rem) 0;
-    border: 0;
-    cursor: pointer;
-    border-bottom: .2rem solid hsl(var(--clr-white) / 0);
-    transition: all 0.5s ease-in-out;
-    &:hover,
-    &:focus {
-        border-color: hsl( var(--clr-white) / 0.5);    
-    }
-
-    &.active,
-    &[aria-selected="true"] {
-        color: hsl( var(--clr-white) );
-        border-color: hsl( var(--clr-white) / 1);
-    }
-}
-
 .tab-list {
     --gap: 2rem;
 }
@@ -334,9 +304,3 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
         color: hsl( var(--clr-dark) );
     }
 }
-
-/* -------------------------- */
-/* Page specific              */
-/* -------------------------- */
-
-// Home

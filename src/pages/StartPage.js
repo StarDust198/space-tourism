@@ -1,11 +1,12 @@
-import { Helmet } from "react-helmet"
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 
 import bgMobile from '../assets/home/background-home-mobile.jpg'
 import bgTablet from '../assets/home/background-home-tablet.jpg'
 import bgDesktop from '../assets/home/background-home-desktop.jpg'
 
+
 export default function StartPage () {
-  return (
+  return (    
     <>
       <Helmet>
         <style>{`

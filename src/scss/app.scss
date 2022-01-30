@@ -1,13 +1,77 @@
-#primary-navigation {
+.primary-navigation {
+    list-style: none;
+    margin: 0;
     position: fixed;
     width: 67%;
     height: 100vh;
     top: 0;
-    right: 0;
-    padding: 118px 32px;
+    right: -67%;
+    padding: min(20rem, 15vh) 2rem;
     flex-direction: column;
-    z-index: 5;
-    --gap: 1rem;
+    z-index: 100;
+    transition: all 0.7s ease-in-out;
+    // --gap: 0;
     background-color: rgba(0,0,0, 0.3);
     backdrop-filter: blur(30px);
+    & a {
+        text-decoration: none;
+        & > span {
+            font-weight: 700;
+            margin-right: .5em;
+        }
+    }
+    &.menuActive {
+        right: 0;
+    }
+}
+
+@supports not (backdrop-filter: blur(30px)) {
+    .primary-navigation {
+        background-color: rgba(0,0,0, 0.95);
+    }
+}
+
+@media(min-width: 35em) {
+    .primary-navigation { 
+        top: 40px;
+        width: 56%;
+        height: 10vh;
+        flex-direction: row;       
+        --gap: 4rem;
+        padding: 0 120px;
+        background-color: rgba(255,255,255, 0.1);
+        align-items: center;
+    }
+}
+
+@supports not (backdrop-filter: blur(30px)) {
+    @media(min-width: 35em) {
+        .primary-navigation {
+            background-color: rgba(0,0,0, 0.75);
+        }
+    }
+}
+
+.underline-indicators > * {
+    padding: var(--ul-gap, 1rem) 0;
+    border: 0;  
+}
+
+@media(min-width: 35em) {
+    .underline-indicators > * {
+        padding: var(--ul-gap, 1rem) 0;
+        cursor: pointer;
+        border-bottom: .2rem solid hsl(var(--clr-white) / 0);
+        transition: all 0.5s ease-in-out;
+        &:hover,
+        &:focus {
+            border-color: hsl( var(--clr-white) / 0.5);    
+        }
+    
+        &.active,
+        &[aria-selected="true"] {
+            color: hsl( var(--clr-white) );
+            border-color: hsl( var(--clr-white) / 1);
+        }
+    }
 }
