@@ -83,7 +83,7 @@ body {
     color: hsl(var(--clr-white));
     line-height: 1.5;
     min-height: 100vh;
-
+    max-width: 100vw;
     display: grid;
 }
 
@@ -262,6 +262,7 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
 
 @media (min-width: 35em) {
     .numbered-title {
+        white-space: nowrap;
         justify-self: start;
         letter-spacing: 3.375px;
     }
@@ -273,8 +274,8 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
 
 @media (min-width: 55em) {
     .numbered-title {
-        padding-inline: 10.5rem;
-        grid-column: 1/4;
+        padding-left: 10.5rem;
+        grid-column: 1/6;
         letter-spacing: 4.75px;
     }
 

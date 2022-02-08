@@ -5,6 +5,7 @@ import { useMediaQuery } from 'react-responsive'
 import { HelmetProvider } from 'react-helmet-async'
 
 import './scss/app.scss'
+import './scss/grid.scss'
 import logo from './assets/shared/logo.svg'
 
 function App() {
@@ -65,7 +66,7 @@ function App() {
             className={`mobile-nav-toggle ${showMenu ? 'mobile-nav-transform' : ''}`}
             aria-controls="primary-navigation"
           >
-            <span className='sr-only' aria-expanded={`${showMenu}`}>Menu</span>
+            <span className='sr-only' aria-expanded={showMenu}>Menu</span>
           </button>
         : null}
       </header>

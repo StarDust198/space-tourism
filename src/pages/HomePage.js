@@ -1,7 +1,5 @@
 import { Helmet } from 'react-helmet-async'
 
-import '../scss/homepage.scss'
-
 import bgMobile from '../assets/home/background-home-mobile.jpg'
 import bgTablet from '../assets/home/background-home-tablet.jpg'
 import bgDesktop from '../assets/home/background-home-desktop.jpg'
