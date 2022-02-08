@@ -9,14 +9,17 @@
     --clr-white: 0 0% 100%;
 
     /* font sizes, rem's used to improve accesibility */  
-    --fs-900: clamp(5rem, 10vw + 1rem, 9.375rem);
+    --fs-900: clamp(5rem, 18vw + 1rem, 9.375rem);
     --fs-800: 3.5rem;
-    --fs-700: 1.5rem;
+    --fs-700: 1.75rem;
     --fs-600: 1rem;
-    --fs-500: 1.75rem;
+    --fs-500: 1rem;
     --fs-400: 0.9375rem;
     --fs-300: 1rem;
-    --fs-200: 0.875rem;    
+    --fs-200: 0.875rem; 
+    --fs-100: 0.875rem;
+
+    --fs-40: 1.5rem;
 
     /* font-families */
     --ff-serif: "Bellefair", serif;
@@ -28,19 +31,26 @@
     :root {
         /* font sizes */  
         --fs-800: 5rem;
-        --fs-700: 2.5rem;
         --fs-600: 1.5rem;
+        --fs-500: 1.25rem;
         --fs-400: 1rem;
+        --fs-200: 1rem; 
+        --fs-100: 0.875rem;
+
+        --fs-40: 2.5rem;
     }
 }
 
-@media (min-width: 45em) {
+@media (min-width: 55em) {
     :root {
         /* font sizes */  
         --fs-800: 6.25rem;
-        --fs-700: 3.5rem;
+        // --fs-700: 3.5rem;
         --fs-600: 2rem;
+        --fs-500: 1.75rem;
         --fs-400: 1.125rem;
+        
+        -fs-40: 3.5rem;
     }
 }
 
@@ -52,8 +62,9 @@
     box-sizing: border-box;
 }
 
-body, h1, h2, h3, h4, h5, p, figure, picture {
+body, h1, h2, h3, h4, h5, p, figure, picture, ul {
     margin: 0;
+    padding: 0;
 }
 
 body, h1, h2, h3, h4, h5, p {
@@ -124,49 +135,8 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
     grid-template-rows: min-content 1fr;
 }
 
-.container {
-    max-width: 80rem;
-    padding: 0 2em;
-    margin: 0 auto;
-}
-
-.grid-container {
-    text-align: center;
-    display: grid;
-    place-items: center;
-    padding: 0 1rem;
-    &> * {
-      max-width: 50ch;
-    }
-}
-
-@media (min-width: 55em) {
-    .grid-container {
-        padding: 0;
-        text-align: left;
-        column-gap: var(--container-gap, 2rem);
-        grid-template-columns: minmax(1rem, 1fr) repeat(2, minmax(0, 30rem)) minmax(1rem, 1fr);
-        place-items: unset;
-        &> *:first-child {
-            grid-column: 2;
-        }
-        &> *:last-child {
-            grid-column: 3;
-        }
-        &--home {
-            padding-bottom: max(6rem, 10vh);
-            align-items: end;
-            &> *:first-child {
-                justify-self: start;
-            }
-            &> *:last-child {
-                justify-self: end;
-            }
-        }
-    }
-}
-
 .sr-only {
+    font-size: 1px;
     position: absolute;
     width: 1px;
     height: 1px;
@@ -208,68 +178,52 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
 .fs-400 { font-size: var(--fs-400); }
 .fs-300 { font-size: var(--fs-300); }
 .fs-200 { font-size: var(--fs-200); }
+.fs-100 { font-size: var(--fs-100); }
+
+.fs-40 { font-size: var(--fs-40); }
 
 .fs-900,
 .fs-800,
 .fs-700,
-.fs-600 {
+.fs-600,
+.fs-40 {
     line-height: 1.1;
 }
 
 .numbered-title {
-    letter-spacing: 4.75px;
+    text-align: center;
+    letter-spacing: 2.7px;
     font-family: var(--ff-sans-cond);
     font-size: var(--fs-500);
     text-transform: uppercase;
+
 }
 
 .numbered-title span {
     color: hsl(var(--clr-white) / 0.25);
     font-weight: bold;   
-    margin-right: .5em; 
+    margin-right: .5em;
 }
 
 /* -------------------------- */
 /* Components                 */
 /* -------------------------- */
 
-.large-button {
-    text-decoration: none;
-    display: inline-grid;
-    place-items: center;
-    padding: 0 2em;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    text-align: center;
-    position: relative;
-    font-size: 2rem;
-    &::before {
-        content: '';
-        position: absolute;
-        background: hsl(var(--clr-white) / 0.1);
-        border-radius: inherit;
-        z-index: -5;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-        transition: opacity 0.5s linear, transform 0.5s ease-in-out;
-    }
-    &:hover::before,
-    &:focus::before {
-        opacity: 1;
-        transform: scale(1.67);
-    }
-}
-
 .tab-list {
     --gap: 2rem;
+    list-style: none;
+    justify-content: center;
+}
+
+.dot-indicators {
+    justify-content: center;
 }
 
 .dot-indicators > * {
     cursor: pointer;
     border: 0;
     border-radius: 50%;    
-    padding: .5em;
+    padding: .4em;
     aspect-ratio: 1;   
     background-color: hsl( var(--clr-white) / 0.17);    
     transition: all 0.5s ease-in-out;
@@ -302,5 +256,29 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
     &[aria-selected="true"] {
         background-color: hsl( var(--clr-white));
         color: hsl( var(--clr-dark) );
+    }
+}
+
+
+@media (min-width: 35em) {
+    .numbered-title {
+        justify-self: start;
+        letter-spacing: 3.375px;
+    }
+    .dot-indicators > * {
+        padding: .5em;
+    }
+}
+
+
+@media (min-width: 55em) {
+    .numbered-title {
+        padding-inline: 10.5rem;
+        grid-column: 1/4;
+        letter-spacing: 4.75px;
+    }
+
+    .tab-list {
+        justify-content: start;
     }
 }
