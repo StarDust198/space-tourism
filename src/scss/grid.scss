@@ -1,3 +1,7 @@
+.container {
+    padding-inline: 1.5rem;
+}
+
 .grid-container {
     margin-top: 1.5rem;
     // grid-auto-rows: min-content;
@@ -7,7 +11,7 @@
     display: grid;
     place-items: center;
     padding: 0 1.5rem 3rem; 
-    &> *:not(.numbered-title) {
+    &> *:not(.numbered-title):not(.tech-image) {
       max-width: 50ch;
     }
     &--home {
@@ -61,11 +65,36 @@
             }
         }
     }
+    &--tech {
+        // grid-template-rows: min-content min-content;
+        padding-inline: 0;
+        .tech-block {            
+            h2 {
+                margin-top: 1.75rem;
+                span {
+                    margin-top: 0.5rem;
+                }
+            }
+            p {
+                line-height: 1.66;
+                margin-top: 1rem;
+            }
+        }
+    }
 }
 
 @media (min-width: 35em) {
-    .grid-container {
+    .container {
         padding-inline: 2.5rem;
+    }
+
+    .grid-container {
+        margin-top: 2.5rem;  
+        grid-template-rows: min-content;
+        padding-inline: 2.5rem;
+        &--home {
+            grid-template-rows: unset;
+        }
         &--destination {
             .destination-info {
                 margin-top: 3rem;
@@ -81,9 +110,8 @@
                 }
             }
         }
-        &--crew {
-            margin-top: 2.5rem;     
-            grid-template-rows: min-content min-content 1fr;
+        &--crew {               
+            // grid-template-rows: min-content min-content 1fr;
             --gap: 2.5rem;
             padding-bottom: 0;
             .crew-image {
@@ -93,7 +121,7 @@
                 max-width: unset;
                 align-self: end;
                 & > img {
-                    height: unset;
+                    height: 100%;
                 }
             }
             .crew-block {
@@ -112,10 +140,41 @@
                 }
             }
         }
+        &--tech {            
+            padding-inline: 0;
+            padding-bottom: 6rem;
+            // grid-template-rows: min-content min-content 1fr;
+            .tech-block.container {   
+                max-width: 57ch;       
+                h2 {
+                    margin-top: 2.75rem;
+                    span {
+                        margin-top: 1rem;
+                    }
+                }
+                p {
+                    line-height: 1.75;
+                }
+            }
+            .tech-image {
+                img {
+                    width: 100vw;
+                }
+            }
+        }
     }
 }
 
 @media (min-width: 55em) {
+    h2 > span {
+        white-space: nowrap;
+    }
+    .container {
+        padding-inline: unset;
+        &.numbered-title {
+            padding-left: 10.5rem;
+        }
+    }
     .grid-container {
         margin-top: 4.75rem;        
         padding: 0;
@@ -179,14 +238,39 @@
             .crew-block {
                 grid-column: 2;
                 height: 100%;
-                h2 > span {
-                    white-space: nowrap;
-                }
                 .dot-indicators {
                     margin-top: auto;
                     justify-content: start;
                     margin-bottom: max(6rem, 10vh);
                 }
+            }
+        }
+        &--tech {
+            padding-bottom: 6.25rem;
+            grid-template-columns: minmax(1rem, 1fr) 32rem minmax(1rem, 12rem) 22rem minmax(1rem, 1fr);
+            row-gap: 1.5rem;
+            .tech-block.container {
+                --fs-40: 3.5rem;
+                grid-column: 2/4;
+                display: flex;
+                gap: 5rem;
+                align-items: center;
+                .number-indicators {
+                    --gap: 2rem
+                }
+                h2 {
+                    margin-top: 0;
+                    span {
+                        letter-spacing: normal;
+                    }
+                }             
+                & > * {
+                    max-width: 44ch;
+                }
+            }
+            .tech-image {
+                grid-column: 4/6;
+                order: 5;
             }
         }
     }

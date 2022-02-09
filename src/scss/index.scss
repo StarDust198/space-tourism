@@ -238,24 +238,27 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
     }
 }
 
-.number-indicators > * {
-    display: block;
-    cursor: pointer;
-    border: 1px solid hsl( var(--clr-white) / 0.25);
-    border-radius: 50%;   
-    width: 5rem;
-    aspect-ratio: 1;
-    background-color: hsl( var(--clr-dark));
-    color:hsl( var(--clr-white) );
-    transition: all 0.5s ease-in-out; 
-    &:hover,
-    &:focus {
-        border-color: hsl( var(--clr-white) / 1);  
-    }
-    &.active,
-    &[aria-selected="true"] {
-        background-color: hsl( var(--clr-white));
-        color: hsl( var(--clr-dark) );
+.number-indicators {
+    justify-content: center;
+    & > * {
+        display: block;
+        cursor: pointer;
+        border: 1px solid hsl( var(--clr-white) / 0.25);
+        border-radius: 50%;   
+        width: 2.5rem;
+        aspect-ratio: 1;
+        background-color: hsl( var(--clr-dark));
+        color:hsl( var(--clr-white) );
+        transition: all 0.5s ease-in-out; 
+        &:hover,
+        &:focus {
+            border-color: hsl( var(--clr-white) / 1);  
+        }
+        &.active,
+        &[aria-selected="true"] {
+            background-color: hsl( var(--clr-white));
+            color: hsl( var(--clr-dark) );
+        }
     }
 }
 
@@ -269,6 +272,11 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
     .dot-indicators > * {
         padding: .5em;
     }
+    .number-indicators {
+        & > * {
+            width: 3.75rem;
+        }
+    }
 }
 
 
@@ -281,5 +289,11 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
 
     .tab-list {
         justify-content: start;
+    }
+    .number-indicators {
+        flex-direction: column;
+        & > * {
+            width: 5rem;
+        }
     }
 }
