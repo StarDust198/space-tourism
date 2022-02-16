@@ -6,6 +6,7 @@ import {
   Route
 } from 'react-router-dom'
 
+import data from './data.json'
 import './scss/index.scss'
 
 import App from './App'
@@ -21,9 +22,9 @@ ReactDOM.render(
       <Routes>      
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
-          <Route path="destination" element={<DestPage />} />
-          <Route path="crew" element={<CrewPage />} />
-          <Route path="tech" element={<TechPage />} />
+          <Route path="destination" element={<DestPage destinations={data.destinations} />} />
+          <Route path="crew" element={<CrewPage crew={data.crew} />} />
+          <Route path="tech" element={<TechPage tech={data.technology} />} />
         </Route>
         <Route path="/design" element={<Design />} />
       </Routes>

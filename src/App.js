@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 // import classNames from 'classnames'
 import { HelmetProvider } from 'react-helmet-async'
@@ -9,6 +9,17 @@ import './scss/grid.scss'
 import logo from './assets/shared/logo.svg'
 
 function App() {
+  const [ activePage, setActivePage ] = useState(0)
+  const pages = [[
+    'home','/'
+  ], [
+    'destination', '/destination'
+  ], [
+    'crew', '/crew'
+  ],[
+    'technology', '/tech'
+  ]]
+
   const handleMediaQueryChange = (matches) => {
     // matches will be true or false based on the value for the media query
     setShowMenu(isTablet)
@@ -25,6 +36,21 @@ function App() {
 
   console.log('render');
 
+  const renderNavLinks = pages.map(([title, href], i) => (
+    <li
+      className={i === activePage ? 'active' : ''}
+      onClick={() => setActivePage(i)}
+      key={i}
+    >
+      <Link 
+        className={`ff-sans-cond ${isTablet ? 'letter-spacing-3 fs-200' : 'letter-spacing-2 fs-300'} uppercase text-white`}
+        to={href}
+      >
+        <span className={isTablet && !isDesktop ? 'd-none' : ''}>0{i}</span>{title}
+      </Link>
+    </li>
+  ))
+
   return (
     <HelmetProvider>
       <header className='primary-header flex'>
@@ -38,26 +64,7 @@ function App() {
             id="primary-navigation" 
             className={`primary-navigation underline-indicators flex ${showMenu ? 'menu-active' : ''}`}
           >
-            <li className="active">
-            <a className={`ff-sans-cond ${isTablet ? 'letter-spacing-3 fs-200' : 'letter-spacing-2 fs-300'} uppercase text-white`} href="/">
-                <span className={isTablet && !isDesktop ? 'd-none' : ''}>00</span>Home
-              </a>
-            </li>
-            <li>
-            <a className={`ff-sans-cond ${isTablet ? 'letter-spacing-3 fs-200' : 'letter-spacing-2 fs-300'} uppercase text-white`} href="/">
-                <span className={isTablet && !isDesktop ? 'd-none' : ''}>01</span>Destination
-              </a>
-            </li>
-            <li>
-            <a className={`ff-sans-cond ${isTablet ? 'letter-spacing-3 fs-200' : 'letter-spacing-2 fs-300'} uppercase text-white`} href="/">
-                <span className={isTablet && !isDesktop ? 'd-none' : ''}>02</span>Crew
-              </a>
-            </li>
-            <li>
-            <a className={`ff-sans-cond ${isTablet ? 'letter-spacing-3 fs-200' : 'letter-spacing-2 fs-300'} uppercase text-white`} href="/">
-                <span className={isTablet && !isDesktop ? 'd-none' : ''}>04</span>Technology
-              </a>
-            </li>
+            {renderNavLinks}
           </ul>
         </nav>
         { !isTablet ?

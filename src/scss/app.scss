@@ -30,6 +30,7 @@ h1 > span {
     transition: transform 0.7s ease-in-out;
     background-color: rgba(0,0,0, 0.95);
     & a {
+        height: 100%;
         text-decoration: none;
         white-space: nowrap;
         & > span {
@@ -100,10 +101,13 @@ h1 > span {
 }
 
 .underline-indicators > * {
-    padding: var(--ul-gap, 1rem) 0;
-    border: 0;  
     &[aria-selected="true"] {
         border-bottom: .2rem solid hsl(var(--clr-white) / 1);
+    }
+    & > * {
+        display: block;
+        padding: var(--ul-gap, 1rem) 0;
+        border: 0;  
     }
 }
 
