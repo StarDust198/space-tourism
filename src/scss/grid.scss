@@ -221,7 +221,7 @@
         text-align: left;
         column-gap: var(--container-gap, 2rem);
         grid-template-columns: minmax(1rem, 1fr) 28rem minmax(1rem, 6rem) 28rem minmax(1rem, 1fr);
-        place-items: unset;
+        // place-items: unset;
 
         &--home {
             padding-bottom: max(14vh, 8rem);
@@ -242,14 +242,12 @@
             padding-bottom: max(12vh, 7rem);
 
             .destination-image {
-                align-self: end;
                 grid-column: 2;
                 width: 100%;
             }
 
             .destination-block {
                 --fs-700: 1.75rem;
-                align-self: end;
                 padding-bottom: 0.5rem;
                 grid-column: 4;
 
@@ -301,6 +299,7 @@
         &--tech {
             padding-bottom: 6.25rem;
             grid-template-columns: minmax(1rem, 1fr) 32rem minmax(1rem, 12rem) 22rem minmax(1rem, 1fr);
+            grid-template-rows: min-content;
             row-gap: 1.5rem;
 
             .tech-block.container {
