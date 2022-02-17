@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useMediaQuery } from 'react-responsive'
 
 import bgMobile from '../assets/technology/background-technology-mobile.jpg'
@@ -11,25 +12,57 @@ import bgDesktop from '../assets/technology/background-technology-desktop.jpg'
 // import tech2Portrait from '../assets/technology/image-spaceport-portrait.jpg'
 // import tech3Landscape from '../assets/technology/image-space-capsule-landscape.jpg'
 // import tech3Portrait from '../assets/technology/image-space-capsule-portrait.jpg'
+const transitionStyle = {
+  duration: 1,
+  type: "tween"
+}
+
+const tabAnimation = {
+  enter: arr =>  {
+    return {
+      [arr[1]]: arr[0] < 0 ? 300 : arr[0] > 0 ? -300 : 0,
+      opacity: 0,
+      transition: transitionStyle
+    }
+  },
+  exit: arr => {
+    return { 
+      [arr[1]]: arr[0] > 0 ? 300 : arr[0] < 0 ? -300 : 0,
+      opacity: 0,
+      transition: transitionStyle
+    }
+  },
+  visible: {
+    x: 0,
+    y: 0,
+    opacity: 1,
+    transition: transitionStyle
+  }
+}
 
 export default function TechPage ({ tech }) {
-  const [ techTab, setTechTab ] = useState(0)
+  const [[tab, direction, angle], setTab] = useState([0, 0, 'x'])
 
   const handleMediaQueryChange = (matches) => {
     // matches will be true or false based on the value for the media query
-    console.log('hi')
+    // console.log('hi')
   }
 
   const isTablet = useMediaQuery({ query: '(min-width: 35rem)' }, undefined,  handleMediaQueryChange)
   const isDesktop = useMediaQuery({ query: '(min-width: 55rem)' }, undefined,  handleMediaQueryChange)
 
-  // (({ name, desctription, images: { portraint, landscape } }))
+  const changeTab = (n) => {
+    if (n === tab) return
+    const turn = !isDesktop ? 'x' : 'y'
+    // console.log([n, tab-n, turn]);
+    setTab(arr => [n, arr[0]-n, turn])    
+  }
 
   const buttons = tech.map((item, i) => (
     <button 
       role="tab"
-      aria-selected={techTab === i ? true : false}
-      onClick={() => setTechTab(i)}
+      aria-selected={tab === i ? true : false}
+      onClick={() => changeTab(i)}
       className="fs-600"
       key={i}
     >
@@ -38,25 +71,34 @@ export default function TechPage ({ tech }) {
   ))
 
   const techImage = tech.map(({name, images: {portrait, landscape}}, i) => (
-    <img 
+    <motion.img 
+      animate="visible"
+      initial="enter"
+      exit="exit"
+      variants={tabAnimation}
+      key={name}
+      custom={[direction, angle]}
       src={isDesktop ? portrait : landscape} 
       alt={name} 
-      key={i}
-      className={`d-${i === techTab ? 'block' : 'none'}`}
     />
   ))
 
   const techBlock = tech.map(({name, description}, i) => (
-    <div
-      key={i}
-      className={`d-${i === techTab ? 'block' : 'none'}`}
+    <motion.div
+      animate="visible"
+      initial="enter"
+      exit="exit"
+      variants={tabAnimation}
+      key={name}
+      className='crew-image'
+      custom={[direction, angle]}
     >
       <h2 className="fs-200 text-light uppercase ff-sans-cond letter-spacing-2">
         The terminology..
         <span className="fs-40 d-block text-white ff-serif">{name}</span>
       </h2>
       <p className="text-light">{description}</p>
-    </div>
+    </motion.div>
   ))  
 
   return (    
@@ -87,21 +129,17 @@ export default function TechPage ({ tech }) {
       <div className="grid-container grid-container--tech">
         <h2 className="numbered-title letter-spacing-2 container"><span>03</span> Space launch 101</h2> 
         <div className="tech-image">
-          {/* <img src={isDesktop ? tech1Portrait : tech1Landscape} alt='Spacevehicle' /> */}
-          {techImage}
+          <AnimatePresence exitBeforeEnter custom={[direction, angle]}>
+            {techImage[tab]}
+          </AnimatePresence>
         </div>  
         <div className="tech-block container">
           <div className="number-indicators flex">
             {buttons}
           </div>
-          {techBlock}
-{/*           <div>
-            <h2 className="fs-200 text-light uppercase ff-sans-cond letter-spacing-2">
-              The terminology..
-              <span className="fs-40 d-block text-white ff-serif">Launch vehicle</span>
-            </h2>
-            <p className="text-light">A launch vehicle or carrier rocket is a rocket&#8209;propelled vehicle used to carry a payload from Earth's surface to space, usually to Earth orbit or beyond. Our WEB-X carrier rocket is the most powerful in operation. Standing 150 metres tall, it's quite an awe-inspiring sight on the launch pad!</p>
-          </div> */}
+          <AnimatePresence exitBeforeEnter custom={[direction, angle]}>
+            {techBlock[tab]}
+          </AnimatePresence>
         </div>
       </div>
     </>

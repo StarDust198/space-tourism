@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 // import classNames from 'classnames'
 import { HelmetProvider } from 'react-helmet-async'
@@ -9,16 +9,26 @@ import './scss/grid.scss'
 import logo from './assets/shared/logo.svg'
 
 function App() {
-  const [ activePage, setActivePage ] = useState(0)
-  const pages = [[
-    'home','/'
-  ], [
-    'destination', '/destination'
-  ], [
-    'crew', '/crew'
-  ],[
-    'technology', '/tech'
-  ]]
+  const { pathname } = useLocation()
+  
+  const pages = [
+    {
+      page: 'home',
+      href: '/'
+    }, {
+      page: 'destination',
+      href: '/destination'
+    }, {
+      page: 'crew',
+      href: '/crew'
+    }, {
+      page: 'technology', 
+      href: '/tech'
+    }
+  ]
+
+  const currentPage = pages.findIndex(item => item.href === pathname)
+  const [ activePage, setActivePage ] = useState(currentPage)
 
   const handleMediaQueryChange = (matches) => {
     // matches will be true or false based on the value for the media query
@@ -36,7 +46,7 @@ function App() {
 
   console.log('render');
 
-  const renderNavLinks = pages.map(([title, href], i) => (
+  const renderNavLinks = pages.map(({page, href}, i) => (
     <li
       className={i === activePage ? 'active' : ''}
       onClick={() => setActivePage(i)}
@@ -46,7 +56,7 @@ function App() {
         className={`ff-sans-cond ${isTablet ? 'letter-spacing-3 fs-200' : 'letter-spacing-2 fs-300'} uppercase text-white`}
         to={href}
       >
-        <span className={isTablet && !isDesktop ? 'd-none' : ''}>0{i}</span>{title}
+        <span className={isTablet && !isDesktop ? 'd-none' : ''}>0{i}</span>{page}
       </Link>
     </li>
   ))
