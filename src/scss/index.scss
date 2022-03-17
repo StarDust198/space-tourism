@@ -135,6 +135,7 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
 #root {
     display: grid;
     grid-template-rows: min-content 1fr;
+    overflow: hidden;
 }
 
 .sr-only {

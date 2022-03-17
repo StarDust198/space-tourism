@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
+import AnimatedPage from './AnimatedPage'
 import bgMobile from '../assets/home/background-home-mobile.jpg'
 import bgTablet from '../assets/home/background-home-tablet.jpg'
 import bgDesktop from '../assets/home/background-home-desktop.jpg'
@@ -30,7 +31,7 @@ const buttonAnimation = {
 
 export default function HomePage () {
   return (    
-    <>
+    <AnimatedPage>
       <Helmet>
         <style>{`
           body {
@@ -73,6 +74,6 @@ export default function HomePage () {
           <Link to="/destination" className="large-button bg-white text-dark uppercase ff-serif">Explore</Link>
         </motion.div>
       </motion.div>
-    </>
+    </AnimatedPage>
   )
 }

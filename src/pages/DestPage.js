@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { motion, AnimatePresence } from 'framer-motion'
 
+import AnimatedPage from './AnimatedPage'
 import bgMobile from '../assets/destination/background-destination-mobile.jpg'
 import bgTablet from '../assets/destination/background-destination-tablet.jpg'
 import bgDesktop from '../assets/destination/background-destination-desktop.jpg'
@@ -81,7 +82,7 @@ export default function DestPage ({ destinations }) {
   const { name, images: { png, webp }, description, distance, travel } = destinations[tab]
 
   return (    
-    <>
+    <AnimatedPage>
       <Helmet>
         <style>{`
           body {
@@ -141,6 +142,6 @@ export default function DestPage ({ destinations }) {
           </AnimatePresence>
         </div>
       </div>
-    </>
+    </AnimatedPage>
   )
 }

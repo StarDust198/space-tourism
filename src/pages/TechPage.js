@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useMediaQuery } from 'react-responsive'
 
+import AnimatedPage from './AnimatedPage'
 import bgMobile from '../assets/technology/background-technology-mobile.jpg'
 import bgTablet from '../assets/technology/background-technology-tablet.jpg'
 import bgDesktop from '../assets/technology/background-technology-desktop.jpg'
@@ -102,7 +103,7 @@ export default function TechPage ({ tech }) {
   ))  
 
   return (    
-    <>
+    <AnimatedPage>
       <Helmet>
         <style>{`
           body {
@@ -142,6 +143,6 @@ export default function TechPage ({ tech }) {
           </AnimatePresence>
         </div>
       </div>
-    </>
+    </AnimatedPage>
   )
 }

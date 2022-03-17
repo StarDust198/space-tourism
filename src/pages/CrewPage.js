@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { motion, AnimatePresence } from 'framer-motion'
  
+import AnimatedPage from './AnimatedPage'
 import bgMobile from '../assets/crew/background-crew-mobile.jpg'
 import bgTablet from '../assets/crew/background-crew-tablet.jpg'
 import bgDesktop from '../assets/crew/background-crew-desktop.jpg'
@@ -87,7 +88,7 @@ export default function CrewPage ({ crew }) {
   ))
 
   return (    
-    <>
+    <AnimatedPage>
       <Helmet>
         <style>{`
           body {
@@ -124,6 +125,6 @@ export default function CrewPage ({ crew }) {
         </AnimatePresence>
       </div>
 
-    </>
+    </AnimatedPage>
   )
 }

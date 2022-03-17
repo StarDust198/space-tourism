@@ -1,15 +1,23 @@
 import { useState } from 'react'
-import { Link, Outlet, useLocation } from 'react-router-dom'
+import { Link, Route, Routes, useLocation } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 // import classNames from 'classnames'
 import { HelmetProvider } from 'react-helmet-async'
+import data from './data.json'
+
+import HomePage from './pages/HomePage'
+import DestPage from './pages/DestPage'
+import CrewPage from './pages/CrewPage'
+import TechPage from './pages/TechPage'
+
+import { AnimatePresence } from 'framer-motion'
 
 import './scss/app.scss'
 import './scss/grid.scss'
 import logo from './assets/shared/logo.svg'
 
-function App() {
-  const { pathname } = useLocation()
+const App = () => {
+  const location = useLocation()
   
   const pages = [
     {
@@ -27,7 +35,7 @@ function App() {
     }
   ]
 
-  const currentPage = pages.findIndex(item => item.href === pathname)
+  const currentPage = pages.findIndex(item => item.href === location.pathname)
   const [ activePage, setActivePage ] = useState(currentPage)
 
   const handleMediaQueryChange = (matches) => {
@@ -87,9 +95,16 @@ function App() {
           </button>
         : null}
       </header>
-      <Outlet />
+      <AnimatePresence exitBeforeEnter>
+        <Routes key={location.pathname} location={location}>      
+          <Route index element={<HomePage />} />
+          <Route path="/destination" element={<DestPage destinations={data.destinations} />} />
+          <Route path="/crew" element={<CrewPage crew={data.crew} />} />
+          <Route path="/tech" element={<TechPage tech={data.technology} />} />
+        </Routes>
+      </AnimatePresence>
     </HelmetProvider>
   )
 }
 
-export default App;
+export default App
