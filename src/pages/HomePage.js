@@ -71,7 +71,12 @@ export default function HomePage () {
         </motion.div>
 
         <motion.div variants={buttonAnimation} transition={{ duration: 1.5, ease: "easeInOut", delay: 0.5 }} className="main-button">
-          <Link to="/destination" className="large-button bg-white text-dark uppercase ff-serif">Explore</Link>
+          <Link 
+            to="/destination"
+            className="large-button bg-white text-dark uppercase ff-serif"
+          >
+            Explore
+          </Link>
         </motion.div>
       </motion.div>
     </AnimatedPage>

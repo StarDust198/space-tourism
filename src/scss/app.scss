@@ -147,6 +147,14 @@ h1 > span {
 }
 
 @media(min-width: 35em) {
+    #root {
+        max-height: 100vh;
+
+        &>div {
+            max-height: calc(100vh - 6rem);
+        }
+    }
+    
     .primary-header {
         margin-top: 0;
         padding-inline: 2.5rem 0;
@@ -166,7 +174,8 @@ h1 > span {
         align-items: center;
     }
 
-    .underline-indicators > * {
+    .underline-indicators a,
+    .underline-indicators li[role="tab"] {
         --ul-gap: 2rem;
         cursor: pointer;
         border-bottom: .2rem solid hsl(var(--clr-white) / 0);

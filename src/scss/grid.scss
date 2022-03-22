@@ -138,15 +138,14 @@
         &--crew {
             --gap: 2.5rem;
             padding-bottom: 0;
-
+            grid-template-rows: min-content 12.5rem;
             .crew-image {
                 order: 10;
                 border-bottom: none;
-                height: 100%;
                 align-self: end;
-
-                &>img {
-                    height: 100%;
+                & > img {
+                    height: auto;
+                    max-height: 35rem;
                 }
             }
 

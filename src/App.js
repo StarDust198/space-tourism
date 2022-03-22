@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, Route, Routes, useLocation } from 'react-router-dom'
+import { NavLink, Route, Routes, useLocation } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 // import classNames from 'classnames'
 import { HelmetProvider } from 'react-helmet-async'
@@ -35,8 +35,8 @@ const App = () => {
     }
   ]
 
-  const currentPage = pages.findIndex(item => item.href === location.pathname)
-  const [ activePage, setActivePage ] = useState(currentPage)
+  // const currentPage = pages.findIndex(item => item.href === location.pathname)
+  // const [ activePage, setActivePage ] = useState(currentPage)
 
   const handleMediaQueryChange = (matches) => {
     // matches will be true or false based on the value for the media query
@@ -54,18 +54,24 @@ const App = () => {
 
   console.log('render');
 
+  const linkClass = `
+    ff-sans-cond uppercase text-white
+    ${isTablet ? 'letter-spacing-3 fs-200' : 'letter-spacing-2 fs-300'}  
+  `
+  const activeLinkClass = linkClass + ' active'
+
   const renderNavLinks = pages.map(({page, href}, i) => (
     <li
-      className={i === activePage ? 'active' : ''}
-      onClick={() => setActivePage(i)}
+      // className={`${i === activePage ? 'active' : ''}`}
+      // onClick={() => setActivePage(i)}
       key={i}
     >
-      <Link 
-        className={`ff-sans-cond ${isTablet ? 'letter-spacing-3 fs-200' : 'letter-spacing-2 fs-300'} uppercase text-white`}
+      <NavLink
+        className={({ isActive }) => isActive ? activeLinkClass : linkClass}
         to={href}
       >
         <span className={isTablet && !isDesktop ? 'd-none' : ''}>0{i}</span>{page}
-      </Link>
+      </NavLink>
     </li>
   ))
 

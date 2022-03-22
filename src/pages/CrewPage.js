@@ -1,20 +1,11 @@
 import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { motion, AnimatePresence } from 'framer-motion'
- 
+
 import AnimatedPage from './AnimatedPage'
 import bgMobile from '../assets/crew/background-crew-mobile.jpg'
 import bgTablet from '../assets/crew/background-crew-tablet.jpg'
 import bgDesktop from '../assets/crew/background-crew-desktop.jpg'
-
-// import engineerPng from '../assets/crew/image-anousheh-ansari.png'
-// import engineerWebp from '../assets/crew/image-anousheh-ansari.webp'
-// import commanderPng from '../assets/crew/image-douglas-hurley.png'
-// import commanderWebp from '../assets/crew/image-douglas-hurley.webp'
-// import pilotPng from '../assets/crew/image-mark-shuttleworth.png'
-// import pilotWebp from '../assets/crew/image-mark-shuttleworth.webp'
-// import specialistPng from '../assets/crew/image-victor-glover.png'
-// import specialistWebp from '../assets/crew/image-victor-glover.webp'
 
 const transitionStyle = {
   duration: 1,
