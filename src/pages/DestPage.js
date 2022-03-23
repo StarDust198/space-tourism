@@ -54,7 +54,7 @@ export default function DestPage ({ destinations }) {
   }
 
   const destLinks = destinations.map((item, i) => (
-   <li
+    <li
       key={item.name}
       role="tab"
       aria-selected={tab === i ? "true" : "false"}
@@ -65,6 +65,11 @@ export default function DestPage ({ destinations }) {
     </li>
   ))
 
+  const onPan = (event, info) => {
+    if (info.offset.x < -100) changePlanet(tab === 3 ? 0 : tab + 1)
+    if (info.offset.x > 100) changePlanet(tab === 0 ? 3 : tab - 1)
+  }
+
   const destImages = destinations.map(({ name, images: { png, webp }, description, distance, travel }, i) => (
     <motion.div
       animate="visible"
@@ -74,8 +79,10 @@ export default function DestPage ({ destinations }) {
       key={name}
       className='destination-image'
       custom={direction}
+      style={{ touchAction:'none' }}
+      onPanEnd={onPan}
     >
-      <img src={png} alt={name}></img>
+      <img src={png} alt={name} draggable="false"></img>
     </motion.div>
   ))
 
@@ -125,6 +132,8 @@ export default function DestPage ({ destinations }) {
               exit="hidden"
               variants={textAnimation}
               key={name}
+              style={{ touchAction:'none' }}
+              onPanEnd={onPan}
             >
               <h2 className="fs-800 ff-serif uppercase">{name}</h2>
               <p className="text-light fs-400">{description}</p>

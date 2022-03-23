@@ -49,6 +49,11 @@ export default function CrewPage ({ crew }) {
     </button>
   ))
 
+  const onPan = (event, info) => {
+    if (info.offset.x < -100) changeTab(tab === 3 ? 0 : tab + 1)
+    if (info.offset.x > 100) changeTab(tab === 0 ? 3 : tab - 1)
+  }
+
   const crewImage = crew.map(({ name, images: { png } }, i) => (
     <motion.div
       animate="visible"
@@ -58,8 +63,9 @@ export default function CrewPage ({ crew }) {
       key={name}
       className='crew-image'
       custom={direction}
+      onPanEnd={onPan}
     >
-      <img src={png} alt={name} />
+      <img src={png} alt={name} draggable="false" />
     </motion.div>
   ))
 
@@ -72,6 +78,7 @@ export default function CrewPage ({ crew }) {
       key={i}
       className='crew-block'
       custom={direction}
+      onPanEnd={onPan}
     >
       <h2 className="uppercase fs-500 ff-serif">{role} <span className="fs-700 d-block">{name}</span></h2>
       <p className="text-light">{bio}</p> 
@@ -103,7 +110,9 @@ export default function CrewPage ({ crew }) {
           }          
         `}</style>
       </Helmet>      
-      <div className="grid-container grid-container--crew">        
+      <div
+        className="grid-container grid-container--crew"
+      >        
         <h2 className="numbered-title letter-spacing-2"><span>02</span> Meet your crew</h2>    
         <AnimatePresence custom={direction} exitBeforeEnter>
           {[crewImage[tab]]}

@@ -71,6 +71,16 @@ export default function TechPage ({ tech }) {
     </button>
   ))
 
+  const onPan = (event, info) => {
+    if (!isDesktop) {
+      if (info.offset.x < -100) changeTab(tab === 2 ? 0 : tab + 1)
+      if (info.offset.x > 100) changeTab(tab === 0 ? 2 : tab - 1)
+    } else {
+      if (info.offset.y < -100) changeTab(tab === 2 ? 0 : tab + 1)
+      if (info.offset.y > 100) changeTab(tab === 0 ? 2 : tab - 1)
+    }
+  }
+
   const techImage = tech.map(({name, images: {portrait, landscape}}, i) => (
     <motion.img 
       animate="visible"
@@ -81,6 +91,9 @@ export default function TechPage ({ tech }) {
       custom={[direction, angle]}
       src={isDesktop ? portrait : landscape} 
       alt={name} 
+      draggable="false"
+      onPanEnd={onPan}
+      style={{touchAction:'none'}}
     />
   ))
 
@@ -93,6 +106,8 @@ export default function TechPage ({ tech }) {
       key={name}
       className='crew-image'
       custom={[direction, angle]}
+      onPanEnd={onPan}
+      style={{touchAction:'none'}}
     >
       <h2 className="fs-200 text-light uppercase ff-sans-cond letter-spacing-2">
         The terminology..

@@ -34,10 +34,7 @@ const App = () => {
       href: '/tech'
     }
   ]
-
-  // const currentPage = pages.findIndex(item => item.href === location.pathname)
-  // const [ activePage, setActivePage ] = useState(currentPage)
-
+  
   const handleMediaQueryChange = (matches) => {
     // matches will be true or false based on the value for the media query
     setShowMenu(isTablet)
@@ -52,8 +49,6 @@ const App = () => {
     setShowMenu(showMenu => !showMenu)
   }
 
-  console.log('render');
-
   const linkClass = `
     ff-sans-cond uppercase text-white
     ${isTablet ? 'letter-spacing-3 fs-200' : 'letter-spacing-2 fs-300'}  
@@ -61,11 +56,7 @@ const App = () => {
   const activeLinkClass = linkClass + ' active'
 
   const renderNavLinks = pages.map(({page, href}, i) => (
-    <li
-      // className={`${i === activePage ? 'active' : ''}`}
-      // onClick={() => setActivePage(i)}
-      key={i}
-    >
+    <li key={page}>
       <NavLink
         className={({ isActive }) => isActive ? activeLinkClass : linkClass}
         to={href}

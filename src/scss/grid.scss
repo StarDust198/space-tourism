@@ -51,6 +51,8 @@
 
     &--crew {
         .crew-image {
+            touch-action: none;
+            user-select: none;
             width: 100%;
             border-bottom: 1px solid hsl(var(--clr-white)/ 0.25);
 
@@ -61,6 +63,7 @@
         }
 
         .crew-block {
+            touch-action: none;
             min-height: 14rem;
 
             h2 {
@@ -150,6 +153,7 @@
             }
 
             .dot-indicators {
+                
                 order: 5;
                 --gap: 1rem;
             }
@@ -284,7 +288,8 @@
             }
 
             .dot-indicators {
-                justify-content: start;
+                justify-self: start;
+                // justify-content: start;
                 margin-bottom: max(6rem, 10vh);
                 grid-column: 2;
             }
