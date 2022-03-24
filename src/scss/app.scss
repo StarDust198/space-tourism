@@ -43,6 +43,13 @@ h1 > span {
     }
 }
 
+.modal {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+}
 
 .mobile-nav-toggle {    
     cursor: pointer;

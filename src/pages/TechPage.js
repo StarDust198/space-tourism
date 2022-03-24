@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useMediaQuery } from 'react-responsive'
@@ -7,12 +7,7 @@ import AnimatedPage from './AnimatedPage'
 import bgMobile from '../assets/technology/background-technology-mobile.jpg'
 import bgTablet from '../assets/technology/background-technology-tablet.jpg'
 import bgDesktop from '../assets/technology/background-technology-desktop.jpg'
-// import tech1Landscape from '../assets/technology/image-launch-vehicle-landscape.jpg'
-// import tech1Portrait from '../assets/technology/image-launch-vehicle-portrait.jpg'
-// import tech2Landscape from '../assets/technology/image-spaceport-landscape.jpg'
-// import tech2Portrait from '../assets/technology/image-spaceport-portrait.jpg'
-// import tech3Landscape from '../assets/technology/image-space-capsule-landscape.jpg'
-// import tech3Portrait from '../assets/technology/image-space-capsule-portrait.jpg'
+
 const transitionStyle = {
   duration: 1,
   type: "tween"
@@ -43,14 +38,14 @@ const tabAnimation = {
 
 export default function TechPage ({ tech }) {
   const [[tab, direction, angle], setTab] = useState([0, 0, 'x'])
+  const [changeSize, setChangeSize] = useState(0)
 
   const handleMediaQueryChange = (matches) => {
-    // matches will be true or false based on the value for the media query
-    // console.log('hi')
+    setChangeSize(changeSize => changeSize + 1)
   }
 
-  const isTablet = useMediaQuery({ query: '(min-width: 35rem)' }, undefined,  handleMediaQueryChange)
-  const isDesktop = useMediaQuery({ query: '(min-width: 55rem)' }, undefined,  handleMediaQueryChange)
+  const isTablet = useMediaQuery({ query: '(min-width: 35em)' }, undefined,  handleMediaQueryChange)
+  const isDesktop = useMediaQuery({ query: '(min-width: 55em)' }, undefined,  handleMediaQueryChange)
 
   const changeTab = (n) => {
     if (n === tab) return
@@ -58,6 +53,34 @@ export default function TechPage ({ tech }) {
     // console.log([n, tab-n, turn]);
     setTab(arr => [n, arr[0]-n, turn])    
   }
+
+    const nextTab = () => {
+    changeTab(tab === 2 ? 0 : tab + 1)
+  }
+
+  const prevTab = () => {
+    changeTab(tab === 0 ? 2 : tab - 1)
+  }
+ 
+  useEffect(() => {
+    const onKeypress = e => {
+      if (e.code === 'ArrowLeft' && !isDesktop) {
+        prevTab()
+      } else if (e.code === 'ArrowRight' && !isDesktop) {
+        nextTab()
+      } else if (e.code === 'ArrowUp' && isDesktop) {
+        prevTab()
+      } else if (e.code === 'ArrowDown' && isDesktop) {
+        nextTab()
+      }
+    }
+
+    document.addEventListener('keydown', onKeypress)
+
+    return () => {
+      document.removeEventListener('keydown', onKeypress)
+    }
+  }, [tab, changeSize])
 
   const buttons = tech.map((item, i) => (
     <button 
@@ -73,11 +96,11 @@ export default function TechPage ({ tech }) {
 
   const onPan = (event, info) => {
     if (!isDesktop) {
-      if (info.offset.x < -100) changeTab(tab === 2 ? 0 : tab + 1)
-      if (info.offset.x > 100) changeTab(tab === 0 ? 2 : tab - 1)
+      if (info.offset.x < -100) nextTab()
+      if (info.offset.x > 100) prevTab()
     } else {
-      if (info.offset.y < -100) changeTab(tab === 2 ? 0 : tab + 1)
-      if (info.offset.y > 100) changeTab(tab === 0 ? 2 : tab - 1)
+      if (info.offset.y < -100) nextTab()
+      if (info.offset.y > 100) prevTab()
     }
   }
 
@@ -93,7 +116,7 @@ export default function TechPage ({ tech }) {
       alt={name} 
       draggable="false"
       onPanEnd={onPan}
-      style={{touchAction:'none'}}
+      style={{touchAction:'none', userSelect: 'none'}}
     />
   ))
 
@@ -107,7 +130,7 @@ export default function TechPage ({ tech }) {
       className='crew-image'
       custom={[direction, angle]}
       onPanEnd={onPan}
-      style={{touchAction:'none'}}
+      style={{touchAction:'none', userSelect: 'none'}}
     >
       <h2 className="fs-200 text-light uppercase ff-sans-cond letter-spacing-2">
         The terminology..

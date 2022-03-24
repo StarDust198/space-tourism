@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useMediaQuery } from 'react-responsive'
 
 import AnimatedPage from './AnimatedPage'
 import bgMobile from '../assets/crew/background-crew-mobile.jpg'
@@ -33,10 +34,37 @@ const tabAnimation = {
 export default function CrewPage ({ crew }) {
   const [[tab, direction], setTab] = useState([0, 0])
 
+  const isTablet = useMediaQuery({ query: '(min-width: 35em)' })
+  const isDesktop = useMediaQuery({ query: '(min-width: 55em)' })
+
   const changeTab = (n) => {
     if (n === tab) return
     setTab(arr => [n, arr[0] - n])
   }
+
+  const nextTab = () => {
+    changeTab(tab === 3 ? 0 : tab + 1)
+  }
+
+  const prevTab = () => {
+    changeTab(tab === 0 ? 3 : tab - 1)
+  }
+ 
+  useEffect(() => {
+    const onKeypress = e => {
+      if (e.code === 'ArrowLeft') {
+        prevTab()
+      } else if (e.code === 'ArrowRight') {
+        nextTab()
+      }
+    }
+
+    document.addEventListener('keydown', onKeypress)
+
+    return () => {
+      document.removeEventListener('keydown', onKeypress)
+    }
+  }, [tab])
 
   const buttons = crew.map(({role}, i) => (
     <button 
@@ -50,8 +78,8 @@ export default function CrewPage ({ crew }) {
   ))
 
   const onPan = (event, info) => {
-    if (info.offset.x < -100) changeTab(tab === 3 ? 0 : tab + 1)
-    if (info.offset.x > 100) changeTab(tab === 0 ? 3 : tab - 1)
+    if (info.offset.x < -100) nextTab()
+    if (info.offset.x > 100) prevTab()
   }
 
   const crewImage = crew.map(({ name, images: { png } }, i) => (
@@ -64,6 +92,7 @@ export default function CrewPage ({ crew }) {
       className='crew-image'
       custom={direction}
       onPanEnd={onPan}
+      style={{touchAction:'none', userSelect: 'none'}}
     >
       <img src={png} alt={name} draggable="false" />
     </motion.div>
@@ -79,9 +108,15 @@ export default function CrewPage ({ crew }) {
       className='crew-block'
       custom={direction}
       onPanEnd={onPan}
+      style={{touchAction:'none', userSelect: 'none'}}
     >
       <h2 className="uppercase fs-500 ff-serif">{role} <span className="fs-700 d-block">{name}</span></h2>
-      <p className="text-light">{bio}</p> 
+      <p
+        className="text-light"
+        style={isTablet && !isDesktop ? {'max-width': `${bio.length/3.6}ch`} : null}
+      >
+        {bio}
+      </p> 
     </motion.div>
   ))
 

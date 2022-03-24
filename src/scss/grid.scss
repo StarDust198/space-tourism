@@ -11,7 +11,7 @@
     place-items: center;
     padding: 0 1.5rem 3rem;
 
-    &>*:not(.numbered-title):not(.tech-image):not(.crew-image) {
+    &>*:not(.numbered-title):not(.tech-image):not(.crew-image):not(.destination-block):not(.crew-block):not(.tech-block):not(.tech-image) {
         max-width: 50ch;
     }
 
@@ -21,6 +21,7 @@
 
     &--destination {
         padding-bottom: 3.5rem;
+        grid-template-rows: min-content 10.625rem;
 
         .destination-image {
             width: 10.5rem;
@@ -32,27 +33,32 @@
             padding-bottom: 0.5rem;
         }
 
-        .destination-block h2 {
-            margin-top: 1.25rem;
-        }
+        .destination {
+            &-block {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                h2 {
+                    margin-top: 1.25rem;
+                }
+            }
+            &-info {
+                --gap: 2rem;
+                margin-top: 2rem;
+                border-top: 1px solid hsl(var(--clr-white)/ 0.25);
+                padding-top: 2rem;
+                flex-wrap: wrap;
+                justify-content: center;
 
-        .destination-info {
-            margin-top: 2rem;
-            border-top: 1px solid hsl(var(--clr-white)/ 0.25);
-            padding-top: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-
-            &>* {
-                width: 12rem;
+                &>* {
+                    width: 12rem;
+                }
             }
         }
     }
 
     &--crew {
         .crew-image {
-            touch-action: none;
-            user-select: none;
             width: 100%;
             border-bottom: 1px solid hsl(var(--clr-white)/ 0.25);
 
@@ -63,7 +69,6 @@
         }
 
         .crew-block {
-            touch-action: none;
             min-height: 14rem;
 
             h2 {
@@ -83,6 +88,8 @@
 
     &--tech {
         padding-inline: 0;
+        padding-bottom: 5rem;
+        grid-template-rows: min-content 10.625rem 17.875rem;
 
         .tech-block {
             display: flex;
@@ -120,13 +127,15 @@
         }
 
         &--destination {
+            --gap: 3.25rem;
+            grid-template-rows: min-content;
             .destination-info {
+                --fs-700: 1.75rem;
                 margin-top: 3rem;
             }
 
             .destination-image {
                 width: 19rem;
-                aspect-ratio: 1;
             }
 
             .destination-block {
@@ -141,7 +150,7 @@
         &--crew {
             --gap: 2.5rem;
             padding-bottom: 0;
-            grid-template-rows: min-content 12.5rem;
+            grid-template-rows: min-content 12.5rem min-content 1fr;
             .crew-image {
                 order: 10;
                 border-bottom: none;
@@ -153,14 +162,15 @@
             }
 
             .dot-indicators {
-                
-                order: 5;
+                grid-row: 3/4;
+                // order: 5;
                 --gap: 1rem;
             }
 
             .crew-block {
                 --fs-500: 1.5rem;
                 min-height: unset;
+                max-width: 66ch;
 
                 h2 {
                     margin-top: 1.25rem;
@@ -177,12 +187,13 @@
         &--tech {
             padding-inline: 0;
             padding-bottom: 6rem;
-            grid-template-rows: min-content min-content;
+            grid-template-rows: min-content minmax(19.375rem, 1fr) minmax(21.25rem, 1fr);
             gap: 3.5rem;
 
             .tech-block.container {
                 max-width: 57ch;
                 gap: 2.75rem;
+                grid-row: 3/-1;
 
                 h2 {
 
@@ -197,6 +208,7 @@
             }
 
             .tech-image {
+                grid-row: 2/3;
                 img {
                     width: 100vw;
                 }
@@ -297,6 +309,9 @@
             .crew-block {
                 grid-column: 2;
                 align-self: center;
+                p {
+                    max-width: 27.75rem;
+                }
             }
         }
 

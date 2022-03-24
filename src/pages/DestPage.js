@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -52,6 +52,30 @@ export default function DestPage ({ destinations }) {
     if (n === tab) return
     setTab(arr => [n, arr[0] - n])
   }
+  
+  const nextTab = () => {
+    changePlanet(tab === 3 ? 0 : tab + 1)
+  }
+
+  const prevTab = () => {
+    changePlanet(tab === 0 ? 3 : tab - 1)
+  }
+ 
+  useEffect(() => {
+    const onKeypress = e => {
+      if (e.code === 'ArrowLeft') {
+        prevTab()
+      } else if (e.code === 'ArrowRight') {
+        nextTab()
+      }
+    }
+
+    document.addEventListener('keydown', onKeypress)
+
+    return () => {
+      document.removeEventListener('keydown', onKeypress)
+    }
+  }, [tab])
 
   const destLinks = destinations.map((item, i) => (
     <li
@@ -79,7 +103,7 @@ export default function DestPage ({ destinations }) {
       key={name}
       className='destination-image'
       custom={direction}
-      style={{ touchAction:'none' }}
+      style={{touchAction:'none', userSelect: 'none'}}
       onPanEnd={onPan}
     >
       <img src={png} alt={name} draggable="false"></img>
@@ -132,7 +156,7 @@ export default function DestPage ({ destinations }) {
               exit="hidden"
               variants={textAnimation}
               key={name}
-              style={{ touchAction:'none' }}
+              style={{touchAction:'none', userSelect: 'none'}}
               onPanEnd={onPan}
             >
               <h2 className="fs-800 ff-serif uppercase">{name}</h2>
