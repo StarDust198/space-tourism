@@ -71,11 +71,11 @@ export default function HomePage () {
           transition={{ duration: 1.5, ease: "easeInOut", delay: 0.1 }}
           custom={isDesktop ? 'x' : 'y'}
         >
-          <h1 className="ff-sans-cond letter-spacing-1 uppercase text-light fs-500">
+          <h1 className="ff-sans-cond letter-spacing-1 uppercase text-light fs-30">
             So, you want to travel&nbsp;to
-            <span className="ff-serif d-block fs-900 text-white">Space</span>
+            <span className="ff-serif d-block fs-90 text-white">Space</span>
           </h1>
-          <p className="text-light fs-400">Let’s face it; if you want to go to space, you might as well genuinely go to 
+          <p className="text-light">Let’s face it; if you want to go to space, you might as well genuinely go to 
           outer space and not hover kind of on the edge of it. Well sit back, and relax 
           because we’ll give you a truly out of this world experience!</p>
         </motion.div>
@@ -88,7 +88,7 @@ export default function HomePage () {
         >
           <Link 
             to="/destination"
-            className="large-button bg-white text-dark uppercase ff-serif"
+            className="large-button bg-white text-dark uppercase ff-serif fs-50"
           >
             Explore
           </Link>

@@ -110,10 +110,10 @@ export default function CrewPage ({ crew }) {
       onPanEnd={onPan}
       style={{touchAction:'none', userSelect: 'none'}}
     >
-      <h2 className="uppercase fs-500 ff-serif">{role} <span className="fs-700 d-block">{name}</span></h2>
+      <h2 className="uppercase fs-40 ff-serif">{role} <span className="fs-60 d-block">{name}</span></h2>
       <p
         className="text-light"
-        style={isTablet && !isDesktop ? {'max-width': `${bio.length/3.6}ch`} : null}
+        style={isTablet && !isDesktop ? {'maxWidth': `${bio.length/3.6}ch`} : null}
       >
         {bio}
       </p> 

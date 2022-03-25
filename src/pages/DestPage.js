@@ -146,7 +146,7 @@ export default function DestPage ({ destinations }) {
             {destImages[tab]}
           </AnimatePresence>
         <div className="destination-block">
-          <ul className="tab-list underline-indicators flex ff-sans-cond fs-200">
+          <ul className="tab-list underline-indicators flex ff-sans-cond fs-10">
             {destLinks}
           </ul>
           <AnimatePresence exitBeforeEnter>
@@ -159,16 +159,16 @@ export default function DestPage ({ destinations }) {
               style={{touchAction:'none', userSelect: 'none'}}
               onPanEnd={onPan}
             >
-              <h2 className="fs-800 ff-serif uppercase">{name}</h2>
-              <p className="text-light fs-400">{description}</p>
+              <h2 className="fs-80 ff-serif uppercase">{name}</h2>
+              <p className="text-light">{description}</p>
               <div className="destination-info flex">
                 <div className="flow" style={{"--flow-space": "0.75rem"}}>
-                  <p className="fs-100 text-light uppercase ff-sans-cond letter-spacing-3">Avg. distance</p>
-                  <p className="fs-700 ff-serif uppercase">{distance}</p>
+                  <p className="fs-01 text-light uppercase ff-sans-cond letter-spacing-3">Avg. distance</p>
+                  <p className="fs-70 ff-serif uppercase">{distance}</p>
                 </div>
                 <div className="flow" style={{"--flow-space": "0.75rem"}}>
-                  <p className="fs-100 text-light uppercase ff-sans-cond letter-spacing-3">Est. travel time</p>
-                  <p className="fs-700 ff-serif uppercase">{travel}</p>
+                  <p className="fs-01 text-light uppercase ff-sans-cond letter-spacing-3">Est. travel time</p>
+                  <p className="fs-70 ff-serif uppercase">{travel}</p>
                 </div>
               </div>
             </motion.div>

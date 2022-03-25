@@ -54,8 +54,8 @@ const App = () => {
   }
 
   const linkClass = `
-    ff-sans-cond uppercase text-white
-    ${isTablet ? 'letter-spacing-3 fs-200' : 'letter-spacing-2 fs-300'}  
+    ff-sans-cond uppercase text-white fs-21
+    ${isTablet ? 'letter-spacing-3' : 'letter-spacing-2'}  
   `
   const activeLinkClass = linkClass + ' active'
 

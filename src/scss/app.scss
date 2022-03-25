@@ -126,8 +126,7 @@ h1 > span {
     aspect-ratio: 1;
     border-radius: 50%;
     text-align: center;
-    position: relative;
-    font-size: 1.25rem;    
+    position: relative;  
     &::before {
         content: '';
         position: absolute;
@@ -197,10 +196,6 @@ h1 > span {
             color: hsl( var(--clr-white) );
             border-color: hsl( var(--clr-white) / 1);
         }
-    }
-
-    .large-button {
-        font-size: 2rem;
     }
 }
 

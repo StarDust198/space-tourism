@@ -50,7 +50,6 @@ export default function TechPage ({ tech }) {
   const changeTab = (n) => {
     if (n === tab) return
     const turn = !isDesktop ? 'x' : 'y'
-    // console.log([n, tab-n, turn]);
     setTab(arr => [n, arr[0]-n, turn])    
   }
 
@@ -87,7 +86,7 @@ export default function TechPage ({ tech }) {
       role="tab"
       aria-selected={tab === i ? true : false}
       onClick={() => changeTab(i)}
-      className="fs-600"
+      className="fs-40"
       key={i}
     >
       <span className="sr-only">Slide</span> {i+1}
@@ -127,14 +126,13 @@ export default function TechPage ({ tech }) {
       exit="exit"
       variants={tabAnimation}
       key={name}
-      className='crew-image'
       custom={[direction, angle]}
       onPanEnd={onPan}
       style={{touchAction:'none', userSelect: 'none'}}
     >
-      <h2 className="fs-200 text-light uppercase ff-sans-cond letter-spacing-2">
+      <h2 className="fs-10 text-light uppercase ff-sans-cond letter-spacing-2">
         The terminology..
-        <span className="fs-40 d-block text-white ff-serif">{name}</span>
+        <span className="fs-60 d-block text-white ff-serif">{name}</span>
       </h2>
       <p className="text-light">{description}</p>
     </motion.div>
@@ -172,7 +170,7 @@ export default function TechPage ({ tech }) {
             {techImage[tab]}
           </AnimatePresence>
         </div>  
-        <div className="tech-block container">
+        <div className="tech-block container flex">
           <div className="number-indicators flex">
             {buttons}
           </div>
