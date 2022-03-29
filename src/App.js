@@ -15,6 +15,7 @@ import { AnimatePresence } from 'framer-motion'
 import './scss/app.scss'
 import './scss/grid.scss'
 import logo from './assets/shared/logo.svg'
+import { tabWidth, deskWidth } from './widths'
 
 const App = () => {
   const location = useLocation()
@@ -40,8 +41,8 @@ const App = () => {
     setShowMenu(isTablet)
   }
 
-  const isTablet = useMediaQuery({ query: '(min-width: 35rem)' }, undefined,  handleMediaQueryChange)
-  const isDesktop = useMediaQuery({ query: '(min-width: 55rem)' }, undefined,  handleMediaQueryChange)
+  const isTablet = useMediaQuery({ query: `(min-width: ${tabWidth})` }, undefined,  handleMediaQueryChange)
+  const isDesktop = useMediaQuery({ query: `(min-width: ${deskWidth})` }, undefined,  handleMediaQueryChange)
 
   const [showMenu, setShowMenu] = useState(isTablet)
 

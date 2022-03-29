@@ -7,6 +7,7 @@ import AnimatedPage from './AnimatedPage'
 import bgMobile from '../assets/home/background-home-mobile.jpg'
 import bgTablet from '../assets/home/background-home-tablet.jpg'
 import bgDesktop from '../assets/home/background-home-desktop.jpg'
+import { deskWidth, tabWidth } from '../widths'
 
 const textAnimation = {
   hidden: custom => ({
@@ -33,8 +34,8 @@ const buttonAnimation = {
 }
 
 export default function HomePage () {
-  // const isTablet = useMediaQuery({ query: '(min-width: 35em)' })
-  const isDesktop = useMediaQuery({ query: '(min-width: 55em)' })
+  // const isTablet = useMediaQuery({ query: `(min-width: ${tabWidth})` })
+  const isDesktop = useMediaQuery({ query: `(min-width: ${deskWidth})` })
 
   return (    
     <AnimatedPage>
@@ -47,14 +48,14 @@ export default function HomePage () {
             background-attachment: fixed;
           }
           
-          @media(min-width:35em) {
+          @media(min-width:${tabWidth}) {
             body {
               background-image: url(${bgTablet});
               background-position: center center
             }
           }
 
-          @media(min-width:55em) {
+          @media(min-width:${deskWidth}) {
             body {
               background-image: url(${bgDesktop});
             }

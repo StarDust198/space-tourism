@@ -1,3 +1,5 @@
+@import './variables';
+
 /* -------------------------- */
 /* Custom properties          */
 /* -------------------------- */
@@ -28,7 +30,7 @@
     --ff-sans-normal: "Barlow", sans-serif;
 }
 
-@media (min-width: 35em) {
+@media (min-width: $tab-width) {
     :root {
         --fs-10: 1rem;
         --fs-20: 1rem;
@@ -43,7 +45,7 @@
     }
 }
 
-@media (min-width: 55em) {
+@media (min-width: $desk-width) {
     :root {
         --fs-20: 1.125rem;
         --fs-21: 1rem;
@@ -135,7 +137,7 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
 #root {
     display: grid;
     grid-template-rows: min-content 1fr;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .sr-only {
@@ -303,7 +305,7 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
     }
 }
 
-@media (min-width: 35em) {
+@media (min-width: $tab-width) {
     .fs-90 {
         line-height: 1;
     }
@@ -323,7 +325,7 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
     }
 }
 
-@media (min-width: 55em) {
+@media (min-width: $desk-width) {
     .fs-90 {
         line-height: 1.15;
     }

@@ -7,6 +7,7 @@ import AnimatedPage from './AnimatedPage'
 import bgMobile from '../assets/technology/background-technology-mobile.jpg'
 import bgTablet from '../assets/technology/background-technology-tablet.jpg'
 import bgDesktop from '../assets/technology/background-technology-desktop.jpg'
+import { deskWidth, tabWidth } from '../widths'
 
 const transitionStyle = {
   duration: 1,
@@ -44,8 +45,8 @@ export default function TechPage ({ tech }) {
     setChangeSize(changeSize => changeSize + 1)
   }
 
-  const isTablet = useMediaQuery({ query: '(min-width: 35em)' }, undefined,  handleMediaQueryChange)
-  const isDesktop = useMediaQuery({ query: '(min-width: 55em)' }, undefined,  handleMediaQueryChange)
+  const isTablet = useMediaQuery({ query: `(min-width: ${tabWidth})` }, undefined,  handleMediaQueryChange)
+  const isDesktop = useMediaQuery({ query: `(min-width: ${deskWidth})` }, undefined,  handleMediaQueryChange)
 
   const changeTab = (n) => {
     if (n === tab) return
@@ -149,14 +150,14 @@ export default function TechPage ({ tech }) {
             background-attachment: fixed;
           }
           
-          @media(min-width:35em) {
+          @media(min-width:${tabWidth}) {
             body {
               background-image: url(${bgTablet});
               background-position: center center
             }
           }
 
-          @media(min-width:55em) {
+          @media(min-width:${deskWidth}) {
             body {
               background-image: url(${bgDesktop});
             }
