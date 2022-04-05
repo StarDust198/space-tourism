@@ -6,7 +6,7 @@ import AnimatedPage from './AnimatedPage'
 import bgMobile from '../assets/destination/background-destination-mobile.jpg'
 import bgTablet from '../assets/destination/background-destination-tablet.jpg'
 import bgDesktop from '../assets/destination/background-destination-desktop.jpg'
-import { deskWidth, tabWidth } from '../widths'
+import { tabQuery, deskQuery } from '../widths'
 
 const transitionStyle = {
   duration: 1,
@@ -124,14 +124,14 @@ export default function DestPage ({ destinations }) {
             background-attachment: fixed;
           }
           
-          @media(min-width:${tabWidth}) {
+          @media(${tabQuery}) {
             body {
               background-image: url(${bgTablet});
               background-position: center center
             }
           }
 
-          @media(min-width:${deskWidth}) {
+          @media(${deskQuery}) {
             body {
               background-image: url(${bgDesktop});
             }

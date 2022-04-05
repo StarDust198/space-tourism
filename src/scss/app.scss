@@ -205,7 +205,9 @@ h1 > span {
     }
 }
 
-@media (min-width: $desk-width) {
+// @media (min-width: $desk-width) and (orientation : landscape) {
+// @media (orientation : landscape) and (min-width: $tab-width)  {
+@media (orientation: landscape) and (min-width: $tab-width), (min-width: $desk-width) {
     .primary-header {
         margin-top: 2.5rem;
         padding-left: 3.5rem;

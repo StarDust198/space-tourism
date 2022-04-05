@@ -7,7 +7,7 @@ import AnimatedPage from './AnimatedPage'
 import bgMobile from '../assets/crew/background-crew-mobile.jpg'
 import bgTablet from '../assets/crew/background-crew-tablet.jpg'
 import bgDesktop from '../assets/crew/background-crew-desktop.jpg'
-import { deskWidth, tabWidth } from '../widths'
+import { tabQuery, deskQuery } from '../widths'
 
 const transitionStyle = {
   duration: 1,
@@ -35,8 +35,9 @@ const tabAnimation = {
 export default function CrewPage ({ crew }) {
   const [[tab, direction], setTab] = useState([0, 0])
 
-  const isTablet = useMediaQuery({ query: `(min-width: ${tabWidth})` })
-  const isDesktop = useMediaQuery({ query: `(min-width: ${deskWidth})` })
+  const isTablet = useMediaQuery({ query: `(${tabQuery})` })
+  const isDesktop = useMediaQuery({ query: `(${deskQuery})` })
+  // const isLandscape = useMediaQuery({ query: '(orientation: landscape)' })
 
   const changeTab = (n) => {
     if (n === tab) return
@@ -132,14 +133,14 @@ export default function CrewPage ({ crew }) {
             background-attachment: fixed;
           }
           
-          @media(min-width:${tabWidth}) {
+          @media(${tabQuery}) {
             body {
               background-image: url(${bgTablet});
               background-position: center center
             }
           }
 
-          @media(min-width:${deskWidth}) {
+          @media(${deskQuery}) {
             body {
               background-image: url(${bgDesktop});
             }

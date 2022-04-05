@@ -1,8 +1,6 @@
 @import './variables';
 
-:root {
-    font-size: 4.25vw;
-}
+
 
 .container {
     padding-inline: 1.5rem;
@@ -102,30 +100,32 @@
         grid-template-rows: min-content max(10.5rem, 22vh) max(18rem, 40vh);
         gap: max(2rem, 4vh);
 
-        .tech-block {
-            flex-direction: column;
-            height: 100%;
-            justify-content: flex-start;
-            gap: 4vh;
-
-            h2 {
-                span {
-                    margin-top: 0.5rem;
-                }
+        .tech {
+            &-image {
+                max-width: calc(100vw + (100vh - 125vw));
             }
+            &-block {
+                max-width: calc(100vw + (100vh - 125vw));
+                flex-direction: column;
+                height: 100%;
+                justify-content: flex-start;
+                gap: 4vh;
 
-            p {
-                margin-top: 1rem;
+                h2 {
+                    span {
+                        margin-top: 0.5rem;
+                    }
+                }
+
+                p {
+                    margin-top: 1rem;
+                }
             }
         }
     }
 }
 
 @media (min-width: $tab-width) {
-    :root {
-        font-size: 2vw;
-    }
-
     .container {
         padding-inline: 2.5rem;
     }
@@ -224,11 +224,9 @@
     }
 }
 
-@media (min-width: $desk-width) {
-    :root {
-        font-size: 1.1vw;
-    }
-
+// @media (min-width: $desk-width) and (orientation : landscape) {
+// @media (orientation : landscape) and (min-width: $tab-width)  {
+@media (orientation: landscape) and (min-width: $tab-width), (min-width: $desk-width) {
     h2>span {
         white-space: nowrap;
     }
@@ -276,6 +274,9 @@
                 max-height: 50vh;
                 grid-column: 2;
                 width: 100%;
+                img {
+                    width: 100%;
+                }
             }
 
             .destination-block {
@@ -301,7 +302,7 @@
 
         &--crew {
             padding-bottom: 0;
-            grid-template-rows: min-content min(30rem, 50vh) 1fr;
+            grid-template-rows: min-content 1fr 7rem;
             --gap: 2rem;
 
             .numbered-title {
@@ -309,12 +310,15 @@
             }
 
             .crew-image {
-                height: unset;
+                height: 41rem;
+                // max-height: 66vh;
                 grid-column: 3 / 6;
                 grid-row: 1 / 4;
+                // border-bottom: 1px solid hsl(var(--clr-white)/ 0.25);
 
                 img {
                     max-height: 75vh;
+                    height: 100%;
                 }
             }
 
@@ -368,9 +372,10 @@
 
             .tech-image {
                 grid-row: 1/3;
-                align-self: end;
+                // align-self: end;
                 grid-column: 4/6;
                 order: 5;
+                max-width: 60vh;
             }
         }
     }
