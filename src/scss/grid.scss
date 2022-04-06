@@ -1,7 +1,5 @@
 @import './variables';
 
-
-
 .container {
     padding-inline: 1.5rem;
 }
@@ -240,6 +238,7 @@
     }
 
     .grid-container {
+        overflow-y: hidden;
         margin-top: 4.75rem;
         padding: 0;
         text-align: left;
@@ -317,7 +316,7 @@
                 // border-bottom: 1px solid hsl(var(--clr-white)/ 0.25);
 
                 img {
-                    max-height: 75vh;
+                    max-height: unset;
                     height: 100%;
                 }
             }

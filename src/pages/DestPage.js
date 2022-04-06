@@ -116,6 +116,11 @@ export default function DestPage ({ destinations }) {
   return (    
     <AnimatedPage>
       <Helmet>
+        <meta
+          name="description"
+          content="Space tour - Destination"
+        />
+        <title>Space Tour - Pick Your Destinaion</title>
         <style>{`
           body {
             background-image: url(${bgMobile});

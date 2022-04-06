@@ -311,7 +311,6 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
 
 @media (min-width: $tab-width) {
     :root {
-        // font-size: 2vw;
         font-size: min(2vw, 1.56vh);
     }
 
@@ -337,8 +336,7 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
 // @media (min-width: $desk-width) and (orientation : landscape) {
 @media (orientation: landscape) and (min-width: $tab-width), (min-width: $desk-width) {
     :root {
-        // font-size: 1.1vw;
-        font-size: min(1.1vw, 1.77vh);
+        font-size: min(1.3vw, 2vh);
     }
     
     .fs-90 {
@@ -364,16 +362,8 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
     }
 }
 
-// @media (orientation : landscape) and (max-width : $desk-width) {
-//     :root {
-//         --fs-10: 1.2rem;
-//         --fs-20: 1.325rem;
-//         --fs-21: 1.2rem;
-//         --fs-30: 1.95rem;
-//         --fs-40: 2.25rem;
-//         --fs-50: 2.25rem;
-//         --fs-60: 4rem;
-//         --fs-80: 6.5rem;
-//         --fs-90: 9.5rem;
-//     }
-// }
+@media (orientation: landscape) and (min-width: $desk-width) {
+    :root {
+        font-size: min(1.1vw, 1.77vh);
+    }
+}

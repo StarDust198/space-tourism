@@ -125,6 +125,11 @@ export default function CrewPage ({ crew }) {
   return (    
     <AnimatedPage>
       <Helmet>
+        <meta
+          name="description"
+          content="Space tour - Crew Page"
+        />
+        <title>Space Tour - Meet Our Crew</title>
         <style>{`
           body {
             background-image: url(${bgMobile});

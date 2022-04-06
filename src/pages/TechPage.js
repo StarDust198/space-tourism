@@ -142,6 +142,11 @@ export default function TechPage ({ tech }) {
   return (    
     <AnimatedPage>
       <Helmet>
+        <meta
+          name="description"
+          content="Space Tour - Technology"
+        />
+        <title>Space Tour - Space Launch 101</title>
         <style>{`
           body {
             background-image: url(${bgMobile});

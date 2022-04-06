@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
-// import classNames from 'classnames'
 import { HelmetProvider } from 'react-helmet-async'
 import data from './data.json'
 
@@ -15,7 +14,7 @@ import { AnimatePresence } from 'framer-motion'
 import './scss/app.scss'
 import './scss/grid.scss'
 import logo from './assets/shared/logo.svg'
-import { tabQuery, deskQuery } from './widths'
+import { tabQuery, deskWidth, deskQuery } from './widths'
 
 const App = () => {
   const location = useLocation()
@@ -41,8 +40,9 @@ const App = () => {
     setShowMenu(isTablet)
   }
 
-  const isTablet = useMediaQuery({ query: `(${tabQuery})` }, undefined,  handleMediaQueryChange)
-  const isDesktop = useMediaQuery({ query: `(${deskQuery})` }, undefined,  handleMediaQueryChange)
+  const isTablet = useMediaQuery({ query: `(${tabQuery})` }, undefined, handleMediaQueryChange)
+  const isDeskWidth = useMediaQuery({ query: `(min-width: ${deskWidth})`}, undefined, handleMediaQueryChange)
+  const isDesktop = useMediaQuery({ query: `(${deskQuery})` }, undefined, handleMediaQueryChange)
 
   const [showMenu, setShowMenu] = useState(isTablet)
 
@@ -67,7 +67,7 @@ const App = () => {
         to={href}
         onClick={closeMobileMenu}
       >
-        <span className={isTablet && !isDesktop ? 'd-none' : ''}>0{i}</span>{page}
+        <span className={(isTablet && !isDesktop) || (isDesktop && !isDeskWidth) ? 'd-none' : ''}>0{i}</span>{page}
       </NavLink>
     </li>
   ))
@@ -98,22 +98,20 @@ const App = () => {
           </button>
         : null}
       </header>
-      {/* <main> */}
-        <AnimatePresence exitBeforeEnter>        
-          <Routes key={location.pathname} location={location}>      
-            <Route index element={<HomePage />} />
-            <Route path="/destination" element={<DestPage destinations={data.destinations} />} />
-            <Route path="/crew" element={<CrewPage crew={data.crew} />} />
-            <Route path="/tech" element={<TechPage tech={data.technology} />} />
-          </Routes>        
-        </AnimatePresence>
-        {!isTablet && !isDesktop && showMenu ? 
-        <div
-          className="modal"
-          onClick={closeMobileMenu}
-        >
-        </div> : null}
-      {/* </main> */}
+      <AnimatePresence exitBeforeEnter>        
+        <Routes key={location.pathname} location={location}>      
+          <Route index element={<HomePage />} />
+          <Route path="/destination" element={<DestPage destinations={data.destinations} />} />
+          <Route path="/crew" element={<CrewPage crew={data.crew} />} />
+          <Route path="/tech" element={<TechPage tech={data.technology} />} />
+        </Routes>        
+      </AnimatePresence>
+      {!isTablet && !isDesktop && showMenu ? 
+      <div
+        className="modal"
+        onClick={closeMobileMenu}
+      >
+      </div> : null}
     </HelmetProvider>
   )
 }

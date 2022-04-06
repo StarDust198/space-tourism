@@ -40,6 +40,11 @@ export default function HomePage () {
   return (    
     <AnimatedPage>
       <Helmet>
+        <meta
+          name="description"
+          content="Space Tour - Homepage"
+        />
+        <title>Space Tour - Homepage</title>
         <style>{`
           body {
             background-image: url(${bgMobile});
