@@ -45,7 +45,7 @@ export default function TechPage ({ tech }) {
     setChangeSize(changeSize => changeSize + 1)
   }
 
-  const isTablet = useMediaQuery({ query: `(${tabQuery})` }, undefined,  handleMediaQueryChange)
+  // const isTablet = useMediaQuery({ query: `(${tabQuery})` }, undefined,  handleMediaQueryChange)
   const isDesktop = useMediaQuery({ query: `(${deskQuery})` }, undefined,  handleMediaQueryChange)
 
   const changeTab = (n) => {
@@ -80,6 +80,7 @@ export default function TechPage ({ tech }) {
     return () => {
       document.removeEventListener('keydown', onKeypress)
     }
+    // eslint-disable-next-line
   }, [tab, changeSize])
 
   const buttons = tech.map((item, i) => (
@@ -104,7 +105,7 @@ export default function TechPage ({ tech }) {
     }
   }
 
-  const techImage = tech.map(({name, images: {portrait, landscape}}, i) => (
+  const techImage = tech.map(({name, images: {portrait, landscape}}) => (
     <motion.img 
       animate="visible"
       initial="enter"
@@ -116,11 +117,11 @@ export default function TechPage ({ tech }) {
       alt={name} 
       draggable="false"
       onPanEnd={onPan}
-      style={{touchAction:'none', userSelect: 'none'}}
+      className='no-select'
     />
   ))
 
-  const techBlock = tech.map(({name, description}, i) => (
+  const techBlock = tech.map(({name, description}) => (
     <motion.div
       animate="visible"
       initial="enter"
@@ -129,7 +130,7 @@ export default function TechPage ({ tech }) {
       key={name}
       custom={[direction, angle]}
       onPanEnd={onPan}
-      style={{touchAction:'none', userSelect: 'none'}}
+      className='no-select'
     >
       <h2 className="fs-10 text-light uppercase ff-sans-cond letter-spacing-2">
         The terminology..

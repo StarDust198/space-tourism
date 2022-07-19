@@ -25,8 +25,6 @@
         padding-bottom: 3.5rem;
         grid-template-rows: min-content max(10.625rem, 25vh);
 
-
-
         .underline-indicators>* {
             padding-top: 0;
             padding-bottom: 0.5rem;
@@ -62,6 +60,17 @@
     }
 
     &--crew {
+        .arrow-btn {
+            // transform: scale(1.5);
+            position: absolute;
+            top: 70%;
+            right: 7%;
+            &.rotate-left {
+                right: unset;
+                left: 5%;
+            }
+        }
+
         .crew {
             &-image {
                 width: 100%;
@@ -264,6 +273,16 @@
             padding-bottom: max(12vh, 7rem);
             row-gap: 4rem;
 
+            padding-inline: 0.5rem;
+            grid-template-columns: minmax(0.5rem, 1fr) 28rem minmax(1rem, 6rem) 28rem minmax(0.5rem, 1fr);
+            .arrow-btn {
+                grid-row: 2/3;
+                grid-column: -1/-2;
+                &.rotate-left {
+                    grid-column: 1/2;
+                }
+            }
+
             .numbered-title {
                 grid-row: 1;
             }
@@ -303,6 +322,7 @@
             padding-bottom: 0;
             grid-template-rows: min-content 1fr 7rem;
             --gap: 2rem;
+            position: relative;
 
             .numbered-title {
                 grid-column: 1/3;

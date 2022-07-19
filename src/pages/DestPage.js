@@ -48,6 +48,7 @@ const planetAnimation = {
 
 export default function DestPage ({ destinations }) {
   const [[tab, direction], setTab] = useState([0, 0])
+  // const isDesktop = useMediaQuery({ query: `(${deskQuery})` })
 
   const changePlanet = (n) => {
     if (n === tab) return
@@ -76,6 +77,7 @@ export default function DestPage ({ destinations }) {
     return () => {
       document.removeEventListener('keydown', onKeypress)
     }
+    // eslint-disable-next-line
   }, [tab])
 
   const destLinks = destinations.map((item, i) => (
@@ -95,23 +97,22 @@ export default function DestPage ({ destinations }) {
     if (info.offset.x > 100) changePlanet(tab === 0 ? 3 : tab - 1)
   }
 
-  const destImages = destinations.map(({ name, images: { png, webp }, description, distance, travel }, i) => (
+  const destImages = destinations.map(({ name, images: { png }}) => (
     <motion.div
       animate="visible"
       initial="enter"
       exit="exit"
       variants={planetAnimation}
       key={name}
-      className='destination-image'
+      className='destination-image no-select'
       custom={direction}
-      style={{touchAction:'none', userSelect: 'none'}}
       onPanEnd={onPan}
     >
       <img src={png} alt={name} draggable="false"></img>
     </motion.div>
   ))
 
-  const { name, images: { png, webp }, description, distance, travel } = destinations[tab]
+  const { name, description, distance, travel } = destinations[tab]
 
   return (    
     <AnimatedPage>
@@ -162,7 +163,7 @@ export default function DestPage ({ destinations }) {
               exit="hidden"
               variants={textAnimation}
               key={name}
-              style={{touchAction:'none', userSelect: 'none'}}
+              className='no-select'
               onPanEnd={onPan}
             >
               <h2 className="fs-80 ff-serif uppercase">{name}</h2>

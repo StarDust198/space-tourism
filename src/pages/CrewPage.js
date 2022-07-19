@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useMediaQuery } from 'react-responsive'
 
+import Arrow from '../components/Arrow/Arrow'
 import AnimatedPage from './AnimatedPage'
 import bgMobile from '../assets/crew/background-crew-mobile.jpg'
 import bgTablet from '../assets/crew/background-crew-tablet.jpg'
@@ -66,6 +67,7 @@ export default function CrewPage ({ crew }) {
     return () => {
       document.removeEventListener('keydown', onKeypress)
     }
+    // eslint-disable-next-line
   }, [tab])
 
   const buttons = crew.map(({role}, i) => (
@@ -91,10 +93,9 @@ export default function CrewPage ({ crew }) {
       exit="exit"
       variants={tabAnimation}
       key={name}
-      className='crew-image'
+      className='crew-image no-select'
       custom={direction}
       onPanEnd={onPan}
-      style={{touchAction:'none', userSelect: 'none'}}
     >
       <img src={png} alt={name} draggable="false" />
     </motion.div>
@@ -107,10 +108,9 @@ export default function CrewPage ({ crew }) {
       exit="exit"
       variants={tabAnimation}
       key={i}
-      className='crew-block'
+      className='crew-block no-select'
       custom={direction}
       onPanEnd={onPan}
-      style={{touchAction:'none', userSelect: 'none'}}
     >
       <h2 className="uppercase fs-40 ff-serif">{role} <span className="fs-60 d-block">{name}</span></h2>
       <p
@@ -154,7 +154,13 @@ export default function CrewPage ({ crew }) {
       </Helmet>      
       <div
         className="grid-container grid-container--crew"
-      >        
+      >     
+        {isDesktop && 
+          <>
+            <Arrow direction="left" onClick={prevTab} />
+            <Arrow onClick={nextTab} />
+          </>
+        }
         <h2 className="numbered-title letter-spacing-2"><span>02</span> Meet your crew</h2>    
         <AnimatePresence custom={direction} exitBeforeEnter>
           {[crewImage[tab]]}

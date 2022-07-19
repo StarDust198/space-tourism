@@ -26,7 +26,7 @@ const AnimatedPage = ({children}) => {
 			animate="animate"
 			exit="exit"
 			transition={{ duration: 1.5 }}
-			style={{ display: 'grid'	}}
+			className='grid'
 		>
 			{children}
 		</motion.div>

@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import { HelmetProvider } from 'react-helmet-async'
+import cn from 'classnames'
+
 import data from './data.json'
 
 import HomePage from './pages/HomePage'
@@ -54,20 +56,22 @@ const App = () => {
     if (!isTablet && !isDesktop) setShowMenu(false)
   }
 
-  const linkClass = `
-    ff-sans-cond uppercase text-white fs-21
-    ${isTablet ? 'letter-spacing-3' : 'letter-spacing-2'}  
-  `
-  const activeLinkClass = linkClass + ' active'
-
   const renderNavLinks = pages.map(({page, href}, i) => (
     <li key={page}>
       <NavLink
-        className={({ isActive }) => isActive ? activeLinkClass : linkClass}
+        className={({ isActive }) => cn(
+          'ff-sans-cond', 'uppercase', 'text-white', 'fs-21', 'letter-spacing-2', 
+          {
+            'letter-spacing-3': isTablet,
+            'active': isActive
+          }
+        )}
         to={href}
         onClick={closeMobileMenu}
       >
-        <span className={(isTablet && !isDesktop) || (isDesktop && !isDeskWidth) ? 'd-none' : ''}>0{i}</span>{page}
+        <span className={cn({ 
+          'd-none': (isTablet && !isDesktop) || (isDesktop && !isDeskWidth)
+        })}>0{i}</span>{page}
       </NavLink>
     </li>
   ))
@@ -77,26 +81,26 @@ const App = () => {
       <header className='primary-header flex'>
         <Link to="/"><img className="logo" src={logo} alt="Space Tourism Logo" /></Link>
 
-        { isDesktop ?
+        { isDesktop &&
           <div className="header-line"></div>
-        : null}
+        }
         <nav>
           <ul 
             id="primary-navigation" 
-            className={`primary-navigation underline-indicators flex ${showMenu ? 'menu-active' : ''}`}
+            className={cn('primary-navigation', 'underline-indicators', 'flex', {'menu-active': showMenu})}
           >
             {renderNavLinks}
           </ul>
         </nav>
-        { !isTablet ?
+        { !isTablet &&
           <button
             onClick={onMenuToggle}
-            className={`mobile-nav-toggle ${showMenu ? 'mobile-nav-transform' : ''}`}
+            className={cn('mobile-nav-toggle', {'mobile-nav-transform': showMenu})}
             aria-controls="primary-navigation"
           >
             <span className='sr-only' aria-expanded={showMenu}>Menu</span>
           </button>
-        : null}
+        }
       </header>
       <AnimatePresence exitBeforeEnter>        
         <Routes key={location.pathname} location={location}>      
@@ -106,12 +110,13 @@ const App = () => {
           <Route path="/tech" element={<TechPage tech={data.technology} />} />
         </Routes>        
       </AnimatePresence>
-      {!isTablet && !isDesktop && showMenu ? 
-      <div
-        className="modal"
-        onClick={closeMobileMenu}
-      >
-      </div> : null}
+      {!isTablet && !isDesktop && showMenu && 
+        <div
+          className="modal"
+          onClick={closeMobileMenu}
+        >
+        </div>
+      }
     </HelmetProvider>
   )
 }

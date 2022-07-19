@@ -157,6 +157,11 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
     border: 0;
 }
 
+.no-select {
+    touch-action: none;
+    user-select: none;
+}
+
 /* colors */
 
 .bg-dark { background-color: hsl(var(--clr-dark) );}
@@ -236,6 +241,10 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
     line-height: 1.15;
 }
 
+/* -------------------------- */
+/* Components                 */
+/* -------------------------- */
+
 .numbered-title {
     text-align: center;
     letter-spacing: 2.7px;
@@ -251,10 +260,6 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
     font-weight: bold;   
     margin-right: .5em;
 }
-
-/* -------------------------- */
-/* Components                 */
-/* -------------------------- */
 
 .tab-list {
     --gap: 2rem;
