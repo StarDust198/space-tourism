@@ -29,7 +29,7 @@
     --ff-sans-cond: "Barlow Condensed", sans-serif;
     --ff-sans-normal: "Barlow", sans-serif;
 
-    // font-size: 4.25vw;
+    // dynamic font size
     font-size: min(2.4vh, 4.25vw);
 }
 
@@ -92,7 +92,11 @@ body {
     min-height: 100vh;
     max-width: 100vw;
     display: grid;
+
     transition: background 1.5s ease-in-out;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
 }
 
 input, button, textarea, select {
@@ -142,6 +146,7 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
     display: grid;
     grid-template-rows: min-content 1fr;
     overflow-x: hidden;
+
 }
 
 .sr-only {

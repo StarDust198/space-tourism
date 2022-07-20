@@ -130,7 +130,7 @@ export default function CrewPage ({ crew }) {
           content="Space tour - Crew Page"
         />
         <title>Space Tour - Meet Our Crew</title>
-        <style>{`
+        {/* <style>{`
           body {
             background-image: url(${bgMobile});
             background-size: cover;
@@ -150,7 +150,7 @@ export default function CrewPage ({ crew }) {
               background-image: url(${bgDesktop});
             }
           }          
-        `}</style>
+        `}</style> */}
       </Helmet>      
       <div
         className="grid-container grid-container--crew"

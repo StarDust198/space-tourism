@@ -148,7 +148,7 @@ export default function TechPage ({ tech }) {
           content="Space Tour - Technology"
         />
         <title>Space Tour - Space Launch 101</title>
-        <style>{`
+        {/* <style>{`
           body {
             background-image: url(${bgMobile});
             background-size: cover;
@@ -168,7 +168,7 @@ export default function TechPage ({ tech }) {
               background-image: url(${bgDesktop});
             }
           }          
-        `}</style>
+        `}</style> */}
       </Helmet>
       <div className="grid-container grid-container--tech">
         <h2 className="numbered-title letter-spacing-2 container"><span>03</span> Space launch 101</h2> 

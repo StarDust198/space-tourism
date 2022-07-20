@@ -45,7 +45,7 @@ export default function HomePage () {
           content="Space Tour - Homepage"
         />
         <title>Space Tour - Homepage</title>
-        <style>{`
+        {/* <style>{`
           body {
             background-image: url(${bgMobile});
             background-size: cover;
@@ -65,7 +65,7 @@ export default function HomePage () {
               background-image: url(${bgDesktop});
             }
           }          
-        `}</style>
+        `}</style> */}
       </Helmet>
       <motion.div
         initial="hidden"

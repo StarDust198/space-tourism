@@ -1,56 +1,76 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
-import { HelmetProvider } from 'react-helmet-async'
+import { HelmetProvider, Helmet } from 'react-helmet-async'
 import cn from 'classnames'
-
-import data from './data.json'
+import { AnimatePresence } from 'framer-motion'
 
 import HomePage from './pages/HomePage'
 import DestPage from './pages/DestPage'
 import CrewPage from './pages/CrewPage'
 import TechPage from './pages/TechPage'
 
-import { AnimatePresence } from 'framer-motion'
-
 import './scss/app.scss'
 import './scss/grid.scss'
 import logo from './assets/shared/logo.svg'
-import { tabQuery, deskWidth, deskQuery } from './widths'
+import * as info from './info'
 
 const App = () => {
+  const { data, pages, queries, bgs: {desktop, tablet, mobile}, imgs } = info
+
   const location = useLocation()
-  
-  const pages = [
-    {
-      page: 'home',
-      href: '/'
-    }, {
-      page: 'destination',
-      href: '/destination'
-    }, {
-      page: 'crew',
-      href: '/crew'
-    }, {
-      page: 'technology', 
-      href: '/tech'
-    }
-  ]
-  
+
   const handleMediaQueryChange = (matches) => {
     // matches will be true or false based on the value for the media query
     setShowMenu(isTablet)
+    cacheImages()
   }
 
-  const isTablet = useMediaQuery({ query: `(${tabQuery})` }, undefined, handleMediaQueryChange)
-  const isDeskWidth = useMediaQuery({ query: `(min-width: ${deskWidth})`}, undefined, handleMediaQueryChange)
-  const isDesktop = useMediaQuery({ query: `(${deskQuery})` }, undefined, handleMediaQueryChange)
+  const isTablet = useMediaQuery({ query: `(${queries.tabQuery})` }, undefined, handleMediaQueryChange)
+  const isDeskWidth = useMediaQuery({ query: `(min-width: ${queries.deskWidth})`}, undefined, handleMediaQueryChange)
+  const isDesktop = useMediaQuery({ query: `(${queries.deskQuery})` }, undefined, handleMediaQueryChange)
+
+  const [bgsLoading, setBgsLoading] = useState(true)
+
+  useEffect(() => {
+    cacheImages()
+    // eslint-disable-next-line
+  }, [])
+
+  const cacheImages = async () => {
+    const srcArray = isTablet ? tablet : isDesktop ? desktop : mobile
+    setBgsLoading(true)
+
+    const promises = srcArray.map(src => {
+
+      return new Promise(function(resolve, reject) {
+        const img = new Image()
+
+        img.src = src
+        img.onload = resolve()
+        img.onerror = reject()
+      })
+    })
+
+    await Promise.all(promises)
+
+    setBgsLoading(false)
+  }
 
   const [showMenu, setShowMenu] = useState(isTablet)
 
   const onMenuToggle = () => {
     setShowMenu(showMenu => !showMenu)
   }
+
+  // const checkLoading = (e) => {
+  //   console.log(bgsLoading)
+  //   if (bgsLoading) {
+  //     e.preventDefault()
+  //   } else {
+  //     closeMobileMenu()
+  //   }    
+  // }
 
   const closeMobileMenu = () => {
     if (!isTablet && !isDesktop) setShowMenu(false)
@@ -76,8 +96,29 @@ const App = () => {
     </li>
   ))
 
+  const page = pages.findIndex(item => item.href === location.pathname)
+
   return (
     <HelmetProvider>
+      <Helmet>
+        <style>{`
+          body {
+            background-image: url(${mobile[page]});
+          }
+          
+          @media(${queries.tabQuery}) {
+            body {
+              background-image: url(${tablet[page]});
+            }
+          }
+
+          @media(${queries.deskQuery}) {
+            body {
+              background-image: url(${desktop[page]});
+            }
+          }          
+        `}</style>
+      </Helmet>
       <header className='primary-header flex'>
         <Link to="/"><img className="logo" src={logo} alt="Space Tourism Logo" /></Link>
 
@@ -87,7 +128,7 @@ const App = () => {
         <nav>
           <ul 
             id="primary-navigation" 
-            className={cn('primary-navigation', 'underline-indicators', 'flex', {'menu-active': showMenu})}
+            className={cn('underline-indicators', 'flex', {'menu-active': showMenu})}
           >
             {renderNavLinks}
           </ul>

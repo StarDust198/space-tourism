@@ -122,7 +122,7 @@ export default function DestPage ({ destinations }) {
           content="Space tour - Destination"
         />
         <title>Space Tour - Pick Your Destinaion</title>
-        <style>{`
+        {/* <style>{`
           body {
             background-image: url(${bgMobile});
             background-size: cover;
@@ -142,7 +142,7 @@ export default function DestPage ({ destinations }) {
               background-image: url(${bgDesktop});
             }
           }          
-        `}</style>
+        `}</style> */}
       </Helmet>      
       <div className="grid-container grid-container--destination">
         <h2 className="numbered-title letter-spacing-2"><span>01</span> Pick your destination</h2>

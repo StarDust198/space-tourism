@@ -17,7 +17,7 @@ h1 > span {
     }
 }
 
-.primary-navigation {
+#primary-navigation {
     list-style: none;
     margin: 0;
     position: fixed;
@@ -148,7 +148,7 @@ h1 > span {
 }
 
 @supports (backdrop-filter: blur(30px)) {
-    .primary-navigation {
+    #primary-navigation {
         background-color: rgba(0,0,0, 0.3);
         backdrop-filter: blur(30px);
     }
@@ -172,7 +172,7 @@ h1 > span {
         }
     }
 
-    .primary-navigation {
+    #primary-navigation {
         position: static;
         width: 28rem;
         flex-direction: row;       
@@ -213,7 +213,7 @@ h1 > span {
         padding-left: 3.5rem;
     }
 
-    .primary-navigation { 
+    #primary-navigation { 
         width: min(52rem, 60vw);
         padding: 0 min(7.5rem, calc(12vw - 3rem));
         --gap: min(3rem, 4vw);
