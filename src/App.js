@@ -101,6 +101,10 @@ const App = () => {
   return (
     <HelmetProvider>
       <Helmet>
+        <link rel="preload" href={desktop[0]} as="image"/>
+        <link rel="preload" href={desktop[1]} as="image"/>
+        <link rel="preload" href={desktop[2]} as="image"/>
+        <link rel="preload" href={desktop[3]} as="image"/>
         <style>{`
           body {
             background-image: url(${mobile[page]});
