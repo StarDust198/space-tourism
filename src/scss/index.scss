@@ -22,7 +22,6 @@
     --fs-70: 1.75rem;   // destination numbers
     --fs-80: 3.5rem;    // destination title
     --fs-90: 5rem;      // homepage title
-    //  --fs-900: clamp(5rem, 18vw + 1rem, 9.375rem);
 
     /* font-families */
     --ff-serif: "Bellefair", serif;
@@ -343,7 +342,6 @@ where and is are the new selectors, where is meant to be to eliminate specifity 
     }
 }
 
-// @media (min-width: $desk-width) and (orientation : landscape) {
 @media (orientation: landscape) and (min-width: $tab-width), (min-width: $desk-width) {
     :root {
         font-size: min(1.3vw, 2vh);

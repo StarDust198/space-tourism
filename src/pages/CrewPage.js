@@ -5,10 +5,7 @@ import { useMediaQuery } from 'react-responsive'
 
 import Arrow from '../components/Arrow/Arrow'
 import AnimatedPage from './AnimatedPage'
-import bgMobile from '../assets/crew/background-crew-mobile.jpg'
-import bgTablet from '../assets/crew/background-crew-tablet.jpg'
-import bgDesktop from '../assets/crew/background-crew-desktop.jpg'
-import { tabQuery, deskQuery } from '../widths'
+import { queries } from '../info'
 
 const transitionStyle = {
   duration: 1,
@@ -33,11 +30,11 @@ const tabAnimation = {
   }
 }
 
-export default function CrewPage ({ crew }) {
+export default function CrewPage ({ crew, images }) {
   const [[tab, direction], setTab] = useState([0, 0])
 
-  const isTablet = useMediaQuery({ query: `(${tabQuery})` })
-  const isDesktop = useMediaQuery({ query: `(${deskQuery})` })
+  const isTablet = useMediaQuery({ query: `(${queries.tabQuery})` })
+  const isDesktop = useMediaQuery({ query: `(${queries.deskQuery})` })
   // const isLandscape = useMediaQuery({ query: '(orientation: landscape)' })
 
   const changeTab = (n) => {
@@ -86,18 +83,18 @@ export default function CrewPage ({ crew }) {
     if (info.offset.x > 100) prevTab()
   }
 
-  const crewImage = crew.map(({ name, images: { png } }, i) => (
+  const crewImage = images.map((item, i) => (
     <motion.div
       animate="visible"
       initial="enter"
       exit="exit"
       variants={tabAnimation}
-      key={name}
+      key={item}
       className='crew-image no-select'
       custom={direction}
       onPanEnd={onPan}
     >
-      <img src={png} alt={name} draggable="false" />
+      <img src={item} alt="crew member" draggable="false" />
     </motion.div>
   ))
 
@@ -130,27 +127,6 @@ export default function CrewPage ({ crew }) {
           content="Space tour - Crew Page"
         />
         <title>Space Tour - Meet Our Crew</title>
-        {/* <style>{`
-          body {
-            background-image: url(${bgMobile});
-            background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
-          }
-          
-          @media(${tabQuery}) {
-            body {
-              background-image: url(${bgTablet});
-              background-position: center center
-            }
-          }
-
-          @media(${deskQuery}) {
-            body {
-              background-image: url(${bgDesktop});
-            }
-          }          
-        `}</style> */}
       </Helmet>      
       <div
         className="grid-container grid-container--crew"

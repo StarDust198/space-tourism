@@ -3,10 +3,6 @@ import { Helmet } from 'react-helmet-async'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import AnimatedPage from './AnimatedPage'
-import bgMobile from '../assets/destination/background-destination-mobile.jpg'
-import bgTablet from '../assets/destination/background-destination-tablet.jpg'
-import bgDesktop from '../assets/destination/background-destination-desktop.jpg'
-import { tabQuery, deskQuery } from '../widths'
 
 const transitionStyle = {
   duration: 1,
@@ -46,7 +42,7 @@ const planetAnimation = {
   }
 }
 
-export default function DestPage ({ destinations }) {
+export default function DestPage ({ destinations, images }) {
   const [[tab, direction], setTab] = useState([0, 0])
   // const isDesktop = useMediaQuery({ query: `(${deskQuery})` })
 
@@ -97,18 +93,18 @@ export default function DestPage ({ destinations }) {
     if (info.offset.x > 100) changePlanet(tab === 0 ? 3 : tab - 1)
   }
 
-  const destImages = destinations.map(({ name, images: { png }}) => (
+  const destImages = images.map((item, i) => (
     <motion.div
       animate="visible"
       initial="enter"
       exit="exit"
       variants={planetAnimation}
-      key={name}
+      key={item}
       className='destination-image no-select'
       custom={direction}
       onPanEnd={onPan}
     >
-      <img src={png} alt={name} draggable="false"></img>
+      <img src={item} alt='planet' draggable="false"></img>
     </motion.div>
   ))
 
@@ -122,27 +118,6 @@ export default function DestPage ({ destinations }) {
           content="Space tour - Destination"
         />
         <title>Space Tour - Pick Your Destinaion</title>
-        {/* <style>{`
-          body {
-            background-image: url(${bgMobile});
-            background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
-          }
-          
-          @media(${tabQuery}) {
-            body {
-              background-image: url(${bgTablet});
-              background-position: center center
-            }
-          }
-
-          @media(${deskQuery}) {
-            body {
-              background-image: url(${bgDesktop});
-            }
-          }          
-        `}</style> */}
       </Helmet>      
       <div className="grid-container grid-container--destination">
         <h2 className="numbered-title letter-spacing-2"><span>01</span> Pick your destination</h2>

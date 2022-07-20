@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import { HelmetProvider, Helmet } from 'react-helmet-async'
@@ -23,54 +23,17 @@ const App = () => {
   const handleMediaQueryChange = (matches) => {
     // matches will be true or false based on the value for the media query
     setShowMenu(isTablet)
-    // cacheImages()
   }
 
   const isTablet = useMediaQuery({ query: `(${queries.tabQuery})` }, undefined, handleMediaQueryChange)
   const isDeskWidth = useMediaQuery({ query: `(min-width: ${queries.deskWidth})`}, undefined, handleMediaQueryChange)
   const isDesktop = useMediaQuery({ query: `(${queries.deskQuery})` }, undefined, handleMediaQueryChange)
 
-  // const [bgsLoading, setBgsLoading] = useState(true)
-
-  // useEffect(() => {
-  //   cacheImages()
-  //   // eslint-disable-next-line
-  // }, [])
-
-  // const cacheImages = async () => {
-  //   const srcArray = isTablet ? tablet : isDesktop ? desktop : mobile
-  //   setBgsLoading(true)
-
-  //   const promises = srcArray.map(src => {
-
-  //     return new Promise(function(resolve, reject) {
-  //       const img = new Image()
-
-  //       img.src = src
-  //       img.onload = resolve()
-  //       img.onerror = reject()
-  //     })
-  //   })
-
-  //   await Promise.all(promises)
-
-  //   setBgsLoading(false)
-  // }
-
   const [showMenu, setShowMenu] = useState(isTablet)
 
   const onMenuToggle = () => {
     setShowMenu(showMenu => !showMenu)
   }
-
-  // const checkLoading = (e) => {
-  //   console.log(bgsLoading)
-  //   if (bgsLoading) {
-  //     e.preventDefault()
-  //   } else {
-  //     closeMobileMenu()
-  //   }    
-  // }
 
   const closeMobileMenu = () => {
     if (!isTablet && !isDesktop) setShowMenu(false)
@@ -162,9 +125,9 @@ const App = () => {
       <AnimatePresence exitBeforeEnter>        
         <Routes key={location.pathname} location={location}>      
           <Route index element={<HomePage />} />
-          <Route path="/destination" element={<DestPage destinations={data.destinations} />} />
-          <Route path="/crew" element={<CrewPage crew={data.crew} />} />
-          <Route path="/tech" element={<TechPage tech={data.technology} />} />
+          <Route path="/destination" element={<DestPage images={imgs.dest} destinations={data.destinations} />} />
+          <Route path="/crew" element={<CrewPage images={imgs.crew} crew={data.crew} />} />
+          <Route path="/tech" element={<TechPage images={imgs.tech} tech={data.technology} />} />
         </Routes>        
       </AnimatePresence>
       {!isTablet && !isDesktop && showMenu && 

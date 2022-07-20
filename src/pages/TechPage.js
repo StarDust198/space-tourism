@@ -4,10 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useMediaQuery } from 'react-responsive'
 
 import AnimatedPage from './AnimatedPage'
-import bgMobile from '../assets/technology/background-technology-mobile.jpg'
-import bgTablet from '../assets/technology/background-technology-tablet.jpg'
-import bgDesktop from '../assets/technology/background-technology-desktop.jpg'
-import { tabQuery, deskQuery } from '../widths'
+import { queries } from '../info'
 
 const transitionStyle = {
   duration: 1,
@@ -37,7 +34,7 @@ const tabAnimation = {
   }
 }
 
-export default function TechPage ({ tech }) {
+export default function TechPage ({ tech, images }) {
   const [[tab, direction, angle], setTab] = useState([0, 0, 'x'])
   const [changeSize, setChangeSize] = useState(0)
 
@@ -46,7 +43,7 @@ export default function TechPage ({ tech }) {
   }
 
   // const isTablet = useMediaQuery({ query: `(${tabQuery})` }, undefined,  handleMediaQueryChange)
-  const isDesktop = useMediaQuery({ query: `(${deskQuery})` }, undefined,  handleMediaQueryChange)
+  const isDesktop = useMediaQuery({ query: `(${queries.deskQuery})` }, undefined,  handleMediaQueryChange)
 
   const changeTab = (n) => {
     if (n === tab) return
@@ -105,16 +102,16 @@ export default function TechPage ({ tech }) {
     }
   }
 
-  const techImage = tech.map(({name, images: {portrait, landscape}}) => (
+  const techImage = images.map((item, i) => (
     <motion.img 
       animate="visible"
       initial="enter"
       exit="exit"
       variants={tabAnimation}
-      key={name}
+      key={item}
       custom={[direction, angle]}
-      src={isDesktop ? portrait : landscape} 
-      alt={name} 
+      src={isDesktop ? images[i+3] : item} 
+      alt="technology image" 
       draggable="false"
       onPanEnd={onPan}
       className='no-select'
@@ -148,28 +145,8 @@ export default function TechPage ({ tech }) {
           content="Space Tour - Technology"
         />
         <title>Space Tour - Space Launch 101</title>
-        {/* <style>{`
-          body {
-            background-image: url(${bgMobile});
-            background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
-          }
-          
-          @media(${tabQuery}) {
-            body {
-              background-image: url(${bgTablet});
-              background-position: center center
-            }
-          }
-
-          @media(${deskQuery}) {
-            body {
-              background-image: url(${bgDesktop});
-            }
-          }          
-        `}</style> */}
       </Helmet>
+      
       <div className="grid-container grid-container--tech">
         <h2 className="numbered-title letter-spacing-2 container"><span>03</span> Space launch 101</h2> 
         <div className="tech-image">

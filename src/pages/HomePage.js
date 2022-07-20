@@ -4,10 +4,7 @@ import { motion } from 'framer-motion'
 import { useMediaQuery } from 'react-responsive'
 
 import AnimatedPage from './AnimatedPage'
-import bgMobile from '../assets/home/background-home-mobile.jpg'
-import bgTablet from '../assets/home/background-home-tablet.jpg'
-import bgDesktop from '../assets/home/background-home-desktop.jpg'
-import { tabQuery, deskQuery } from '../widths'
+import { queries } from '../info'
 
 const textAnimation = {
   hidden: custom => ({
@@ -35,7 +32,7 @@ const buttonAnimation = {
 
 export default function HomePage () {
   // const isTablet = useMediaQuery({ query: `(min-width: ${tabWidth})` })
-  const isDesktop = useMediaQuery({ query: `(${deskQuery})` })
+  const isDesktop = useMediaQuery({ query: `(${queries.deskQuery})` })
 
   return (    
     <AnimatedPage>
