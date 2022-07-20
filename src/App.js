@@ -23,39 +23,39 @@ const App = () => {
   const handleMediaQueryChange = (matches) => {
     // matches will be true or false based on the value for the media query
     setShowMenu(isTablet)
-    cacheImages()
+    // cacheImages()
   }
 
   const isTablet = useMediaQuery({ query: `(${queries.tabQuery})` }, undefined, handleMediaQueryChange)
   const isDeskWidth = useMediaQuery({ query: `(min-width: ${queries.deskWidth})`}, undefined, handleMediaQueryChange)
   const isDesktop = useMediaQuery({ query: `(${queries.deskQuery})` }, undefined, handleMediaQueryChange)
 
-  const [bgsLoading, setBgsLoading] = useState(true)
+  // const [bgsLoading, setBgsLoading] = useState(true)
 
-  useEffect(() => {
-    cacheImages()
-    // eslint-disable-next-line
-  }, [])
+  // useEffect(() => {
+  //   cacheImages()
+  //   // eslint-disable-next-line
+  // }, [])
 
-  const cacheImages = async () => {
-    const srcArray = isTablet ? tablet : isDesktop ? desktop : mobile
-    setBgsLoading(true)
+  // const cacheImages = async () => {
+  //   const srcArray = isTablet ? tablet : isDesktop ? desktop : mobile
+  //   setBgsLoading(true)
 
-    const promises = srcArray.map(src => {
+  //   const promises = srcArray.map(src => {
 
-      return new Promise(function(resolve, reject) {
-        const img = new Image()
+  //     return new Promise(function(resolve, reject) {
+  //       const img = new Image()
 
-        img.src = src
-        img.onload = resolve()
-        img.onerror = reject()
-      })
-    })
+  //       img.src = src
+  //       img.onload = resolve()
+  //       img.onerror = reject()
+  //     })
+  //   })
 
-    await Promise.all(promises)
+  //   await Promise.all(promises)
 
-    setBgsLoading(false)
-  }
+  //   setBgsLoading(false)
+  // }
 
   const [showMenu, setShowMenu] = useState(isTablet)
 
@@ -101,10 +101,22 @@ const App = () => {
   return (
     <HelmetProvider>
       <Helmet>
-        <link rel="preload" href={desktop[0]} as="image"/>
-        <link rel="preload" href={desktop[1]} as="image"/>
-        <link rel="preload" href={desktop[2]} as="image"/>
-        <link rel="preload" href={desktop[3]} as="image"/>
+        {
+          !isTablet && !isDesktop && mobile.map((item, i) => (
+            <link key={item} rel="preload" href={item} as="image"/>
+          ))
+        }
+        {
+          isTablet &&
+          tablet.map((item, i) => (
+            <link key={item} rel="preload" href={item} as="image"/>
+          ))
+        }
+        { isDesktop &&
+          desktop.map((item, i) => (
+            <link key={item} rel="preload" href={item} as="image"/>
+          ))
+        }
         <style>{`
           body {
             background-image: url(${mobile[page]});
